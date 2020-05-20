@@ -1,0 +1,1 @@
+﻿export const DATA_HANDLE=Symbol('data-handled')

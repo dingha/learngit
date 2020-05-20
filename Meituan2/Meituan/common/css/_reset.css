@@ -1,0 +1,32 @@
+﻿/*所有的样式重置*/
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+/*祛除默认的一些下划线*/
+a{
+    color:inherit;
+    text-decoration:none;
+}
+ul,
+ol{
+    list-style:none;
+}
+
+button,
+input,
+input:disabled,
+textarea{
+    outline:none;
+    border:none;
+    background-color:#fff;
+
+}
+

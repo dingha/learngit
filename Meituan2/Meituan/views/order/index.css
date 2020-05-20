@@ -1,0 +1,5 @@
+﻿@import '../../common/css/index.css';
+*{
+    font-size:var(--font-size-normal);
+}
+

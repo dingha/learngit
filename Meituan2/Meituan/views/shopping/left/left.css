@@ -1,0 +1,27 @@
+﻿/*食品左侧导航栏*/
+.s-view-food-left {
+    flex: 2;
+    width: 100%;
+    height: 100%;
+}
+/*食品左侧导航栏内容*/
+.s-view-food-species {
+    background: #efebeb;
+    width: 100%;
+    height: 6%;
+    text-align: center;
+    color: rgba(0,0,0,.8);
+    padding-top: 0.3rem;
+    transition: all 0.3s;
+}
+
+    .s-view-food-species > img {
+        width: .3rem;
+        height: .3rem;
+        margin-top: 0rem;
+        padding: 0rem 0rem 0rem 0rem;
+    }
+
+.active {
+    background: #fff;
+}

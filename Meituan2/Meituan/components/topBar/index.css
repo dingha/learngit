@@ -1,0 +1,33 @@
+﻿/*头部样式*/
+.s-header {
+    position: relative;
+    height: 1.2rem;
+    width: 100%;
+    background-size: cover;
+    float: left;
+}
+/*头部左侧样式*/
+.s-header-rtn {
+    background-size: cover;
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    margin: 0rem 0.2rem;
+    z-index: 2;
+}
+
+    .s-header-rtn > img {
+        width: .8rem;
+        height: .8rem;
+        position: absolute;
+        padding: .2rem 0rem 0rem 0rem;
+        position: absolute;
+    }
+/*头部名称样式*/
+.s-header-name {
+    font-size: .4rem;
+    padding-top: .4rem;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+}

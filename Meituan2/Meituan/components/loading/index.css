@@ -1,0 +1,8 @@
+﻿.loading{
+    display: flex;
+    width: 100%;
+    padding: 2rem 0;
+}
+ .loading .loading-img{
+    margin: auto;
+}

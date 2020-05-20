@@ -1,0 +1,71 @@
+﻿.car-bottom {
+    background: #fff;
+    width: 100%;
+    position: absolute;
+    z-index: 2222;
+    bottom: calc(.7rem + 2px);
+}
+
+/*清空购物车字体*/
+.car-bottom-top {
+    text-align: right;
+    padding: .1rem .2rem .2rem .1rem;
+}
+
+.car-bottom-nav {
+}
+/*每一个食品*/
+.car-bottom-nav-food {
+    width: 100%;
+    height: .6rem;
+    position: relative;
+    padding: .3rem 0rem .3rem 0rem;
+}
+/*每一个的左侧名称*/
+.car-bottom-nav-food-name {
+    position: absolute;
+    font-size: .35rem;
+    padding-left: .3rem;
+}
+/*每一个的右侧侧*/
+.car-bottom-nav-food-right {
+    right: 0px;
+    position: absolute;
+}
+/*每个总价*/
+.car-bottom-nav-food-price {
+    font-size: .35rem;
+    padding: 0rem 2.4rem 0rem 0rem;
+}
+/*购物车加减*/
+.car-bottom-nav-food-minus {
+    background: #fff url(../../../assets/img/minus.png);
+    background-size: cover;
+    width: .4rem;
+    height: .4rem;
+    margin: 0rem -1.6rem;
+    position: absolute;
+}
+
+.car-bottom-nav-food-number {
+    font-size: .3rem;
+    position: absolute;
+    margin: 0rem -1.1rem;
+}
+
+.car-bottom-nav-food--plus {
+    background: #fff url(../../../assets/img/plus.png);
+    background-size: cover;
+    width: .4rem;
+    height: .4rem;
+    margin: 0rem -.6rem;
+    position: absolute;
+}
+
+.shadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 11;
+}

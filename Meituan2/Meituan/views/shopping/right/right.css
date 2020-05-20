@@ -1,0 +1,99 @@
+﻿/*食品右侧内容*/
+.s-view-food-right {
+    flex: 9;
+    width: 100%;
+    height: 20%;
+}
+
+.s-view-food-rights {
+    flex: 9;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+/*食品右侧食品内容*/
+.s-view-food-spus {
+    background: #fff;
+    width: 100%;
+    height: 20%;
+    display: flex;
+}
+
+/*右侧食品栏每个内容*/
+.food-item-left {
+    flex: 3;
+}
+
+    .food-item-left > img {
+        width: 1.6rem;
+        height: 1.2rem;
+        padding: .4rem .2rem;
+    }
+/*左侧食品栏每个内容*/
+.food-item-right {
+    flex: 9;
+}
+/*食品名称*/
+.food-name {
+    font-size: .3rem;
+}
+/*食品材料*/
+.food-material {
+    font-size: .22rem;
+    color: rgba(0,0,0,.5);
+}
+/*赞*/
+.food-praise {
+    font-size: .26rem;
+    color: rgba(0,0,0,.5);
+}
+/*食品最下层一栏*/
+.food-bottom {
+    position: relative;
+    height: 25%;
+}
+/*食品单价*/
+.food-unitprice {
+    position: absolute;
+}
+/*价格*/
+.food-price {
+    font-size: .4rem;
+    color: #f6601b;
+}
+
+.food-case {
+    font-size: .3rem;
+    padding-top: .1rem;
+    color: rgba(0,0,0,.5);
+    border-right;
+}
+/*食品最下层右侧*/
+.food-bottom-right {
+    float: right;
+    font-size: .4rem;
+}
+/*减号*/
+.food-minus {
+    background: #fff url(../../../assets/img/minus.png);
+    background-size: cover;
+    width: .3rem;
+    height: .3rem;
+    margin: .1rem -1.6rem;
+    position: absolute;
+}
+
+.food-number {
+    font-size: .26rem;
+    position: absolute;
+    margin: .1rem -1.04rem;
+}
+/*加号*/
+.food-plus {
+    background: #fff url(../../../assets/img/plus.png);
+    background-size: cover;
+    width: .3rem;
+    height: .3rem;
+    margin: .1rem -.6rem;
+    position: absolute;
+}

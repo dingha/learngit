@@ -1,0 +1,97 @@
+﻿@import '../../common/css/index.css';
+@import './left/left.css';
+@import './right/right.css';
+@import './carbottom/carbottom.css';
+
+* {
+    font-size: var(--font-size-normal);
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+/*整个容器样式*/
+.s-container {
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+}
+/*内容样式*/
+.s-view-container {
+    position: relative;
+    height: calc(100% - .7rem - 3px);
+    overflow: auto;
+}
+
+/*尾部样式*/
+.s-footer-container {
+    height: .7rem;
+    /*height: 9rem;*/
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    z-index: 3000;
+}
+/*尾部左侧样式*/
+.s-footer-left {
+    flex: 5;
+    background: rgba(0,0,0,.8);
+    display: flex;
+}
+
+.s-footer-left-icon {
+    width: .75rem;
+    height: .75rem;
+    margin-left: .2rem;
+    margin-top: -.2rem;
+}
+
+.s-footer-left-text {
+    padding-left: .2rem;
+    color: #fff;
+}
+
+.s-footer-left-total {
+    color: #fff;
+}
+
+.s-footer-left-TSfee {
+    color: #fff;
+}
+/*尾部右侧样式*/
+.s-footer-right {
+    background: #cba63e;
+    flex: 2;
+    text-align: center;
+    font-size: 0.26rem;
+    padding-top: .2rem;
+}
+
+/*点菜 评论 商家*/
+.s-nav {
+    display: flex;
+    width: 100%;
+    height: 0.8rem;
+    padding-top: .1rem;
+    text-align: center;
+}
+
+nav {
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.s-nav-order, .s-nav-comments, .s-nav-merchants {
+    flex: 1;
+    font-size: .35rem;
+    width: 100%;
+    height: 100%;
+}
+/*食品总main内容*/
+.s-view-food {
+    display: flex;
+    width: 100%;
+    height: calc(100% - 2rem - 3px);
+}

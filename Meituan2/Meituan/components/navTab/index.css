@@ -1,0 +1,26 @@
+﻿.nav-tab{
+    display:flex;
+    justify-content:space-around;
+    height:100%;
+    text-align:center;
+    padding-top:0.1rem;
+}
+
+.nav-tab .nav-tab-item{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+}
+.nav-tab-box{
+     flex:2;
+    height:1rem;
+    width:1rem;
+}
+ .nav-tab-name{
+    flex:1;
+    font-size:.2rem
+}
+ .nav-tab-img{
+    height:.55rem;
+    width:.55rem;
+}

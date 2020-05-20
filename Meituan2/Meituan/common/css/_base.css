@@ -1,0 +1,14 @@
+﻿html,
+body{
+    height:100%;
+/*不允许放大缩小*/
+    overflow:hidden;
+    position:relative;
+/*最大宽度*/
+    max-width:670px;
+    /*居中*/
+    margin:0 auto;
+
+       /*字体样式*/
+    font-size:var(--font-size-normal);
+}
