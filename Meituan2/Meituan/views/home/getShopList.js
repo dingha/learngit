@@ -2,11 +2,73 @@
 import {getShopItemData} from '../../api/home.js';
 import {rederLoading} from '../../components/index.js'
 
+import InitFactory from '../../utlis/initFactory.js';
 const homemerchants=_('.home-merchants-content');
-//发布订阅
-emitter.on('data-handled',()=>{
-    loadingEl.remove();
-})
+class ShopList extends InitFactory{
+    beforeMount(){
+        //发布订阅;
+        //这里不会
+        emitter.on('data-handled1',e=>{loadingEl.remove()});
+        _('.g-view-container').addEventListener( 'scroll', debounce(slidingData))
+        emitter.on("bottonscroll",e=>{ this.handleData();})
+    }
+    getData( ){
+        return getShopItemData();
+    }
+    handleData( ){
+        this.getData().then(e=>{this.data=e});
+        const data=this.data;
+        const frag=document.createDocumentFragment();
+
+        //先判断ul.innerHTML是否存在，存在的话就是新增
+        //let htme=ul.innerHTML||"";
+        data.forEach(item=>{
+            const{name,
+                pic_url,
+                min_price_tip,
+                month_sale_num,
+                mt_delivery_time,
+                distance,
+                wm_poi_score,
+                brand_type,
+                discounts2
+            }=item
+
+            const shopItenEL=parseToNode(
+           litemp
+              .replace(/__imgPath__/g, pic_url)
+              .replace(/__name__/g,name)
+              .replace(/__shopName__/g,name)
+              .replace( '__sale__',month_sale_num>999 ? '999+' : month_sale_num)
+              .replace( '__delivery-time__',mt_delivery_time)
+              .replace( '__distance__',distance)
+              .replace('__minprice__',min_price_tip)
+              .replace('__stars__',getStars(wm_poi_score))
+              .replace('__brandText__',brand_type ? '品牌':'新到')
+              .replace('__bottom__', getShopItemBottom(discounts2))
+              )[0]
+            //给每个方法添加点击事件
+            //取到点击上的的店铺名称
+            shopItenEL.addEventListener('click',e=>{
+                location.assign('../shopping/index.html?'+'txt=' + e.currentTarget.dataset.shopName);
+            })
+
+            frag.appendChild(shopItenEL);
+        });
+        ul.appendChild(frag)
+
+        emitter.emit('data-handled1')
+        const ulwrapper=document.querySelector('.store-list');
+
+        const con=[ulwrapper,data];
+        return con;
+        //});
+    }
+    mountedData( ){
+        console.log(this)
+    }
+}
+new ShopList();
 
 //加载框
 const loadingEl=rederLoading()
@@ -41,75 +103,21 @@ const litemp = `
 //滚动加载店铺商品
 //用随机数方法得到json数据
 //isok判断是否即将到达底部
-_('.g-view-container').addEventListener( 'scroll', debounce(slidingData))
 
 //滑动方法
 function slidingData(){
+    emitter.on('data-handled',()=>{
+        console.log(1);
+    })
+
     const { scrollHeight, clientHeight }=_('.g-view-container');
     const scrollTop = document.documentElement.scrollTop||
     document.body.scrollTop||_('.g-view-container').scrollTop;
     const con=scrollHeight - (scrollTop + clientHeight);
     if(scrollHeight - (scrollTop + clientHeight) < 50) {
         if(!loadingEl) return;
-        getShopItemData().then(res=>{
-            return handleData(res);//返回得到的json数据
-        }).catch(res=>{
-            console.log(res)
-        })
+        emitter.emit("bottonscroll");
     }
-}
-
-//用随机数方法得到json数据
-getShopItemData().then(res=>{
-    handleData(res);//返回得到的json数据
-})
-
-function handleData(poilist){
-    const frag=document.createDocumentFragment();
-
-    //先判断ul.innerHTML是否存在，存在的话就是新增
-    //let htme=ul.innerHTML||"";
-    poilist.forEach(item=>{
-        const{name,
-            pic_url,
-            min_price_tip,
-            month_sale_num,
-            mt_delivery_time,
-            distance,
-            wm_poi_score,
-            brand_type,
-            discounts2
-        }=item
-
-        const shopItenEL=parseToNode(
-       litemp
-          .replace(/__imgPath__/g, pic_url)
-          .replace(/__name__/g,name)
-          .replace(/__shopName__/g,name)
-          .replace( '__sale__',month_sale_num>999 ? '999+' : month_sale_num)
-          .replace( '__delivery-time__',mt_delivery_time)
-          .replace( '__distance__',distance)
-          .replace('__minprice__',min_price_tip)
-          .replace('__stars__',getStars(wm_poi_score))
-          .replace('__brandText__',brand_type ? '品牌':'新到')
-          .replace('__bottom__', getShopItemBottom(discounts2))
-          )[0]
-        //给每个方法添加点击事件
-        //取到点击上的的店铺名称
-        shopItenEL.addEventListener('click',e=>{
-            location.assign('../shopping/index.html?'+'txt=' + e.currentTarget.dataset.shopName);
-            //console.dir(item.shipping_fee_tip)
-        })
-
-        frag.appendChild(shopItenEL);
-    });
-    ul.appendChild(frag)
-
-    emitter.emit('data-handled')
-    const ulwrapper=document.querySelector('.store-list');
-
-    const con=[ulwrapper,poilist];
-    return con;
 }
 
 //判断店铺星级方法
@@ -149,21 +157,3 @@ function getShopItemBottom(infoArr){
     })
     return htme;
 }
-
-//location.href = "index.html";
-
-//store-list
-//const StoreIist=_('.store-list');
-//const strr=StoreIist.children;
-
-//    const sss=[...StoreIist.children]
-//    console.log(sss)
-//    sss.forEach(sse=>{
-//        StoreIist.addEventListener('click',e=>{
-//            console.log(e)
-
-//        })
-//    })
-//StoreIist.children.on("click",e=>{
-//        console.log(1)
-//})

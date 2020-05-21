@@ -1,1 +1,11 @@
-﻿
+﻿.s-footer-left-red-dot {
+    border-radius: 50%;
+    position: absolute;
+    width: 3%;
+    background: red;
+    color: #fff;
+    font-size: .1rem;
+    margin-left: 0.7rem;
+    text-align: center;
+    margin-top: -.2rem;
+}

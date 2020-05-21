@@ -1,0 +1,1 @@
+﻿export const LEFT_ITEM_CLICKED=Symbol('left-item-clicked')

@@ -1,7 +1,6 @@
 ﻿import {parseToNode,_,emitter} from '../../../utlis/index.js'
+import {allData,carData,redData} from '../data.js'
 const foodrights = _('.s-view-food-rights')
-
-import {allData,carData} from '../data.js'
 const temps=`
             <div class="s-view-food-right"></div>
         `
@@ -34,6 +33,7 @@ const foodtemp =`
 let isok=true;
 let html = '';
 var car=[];
+
 //发布订阅
 //判断是否存在食品，并显示
 emitter.on('left-item-clicked',data=>{
@@ -62,7 +62,9 @@ function handlePlus(el){
     allData.add(el);
     el.itemData.chosenNum++;
     el.querySelector('.food-number').value=el.itemData.chosenNum;
-    //_('.s-footer-left-total').textContent="￥"+carData();
+    _('.s-footer-left-total').textContent="￥"+carData();
+
+    _('.s-footer-left-red-dot').textContent=redData();
 }
 function handleMinus(el){
     if(el.itemData.chosenNum===0){return;}
@@ -70,11 +72,13 @@ function handleMinus(el){
     el.itemData.chosenNum--;
     el.querySelector('.food-number').value=el.itemData.chosenNum;
     if(el.itemData.chosenNum===0){allData.delete(el)}
+    _('.s-footer-left-total').textContent="￥"+carData();
+
+    _('.s-footer-left-red-dot').textContent=redData();
 }
 //生成右侧食品数据
 function getRightItem(item){
     //同步购物车与页面中的数字方法
-    //numbersData(spus,car)
     let foodhtml = '';
     const {
         name,
@@ -94,7 +98,6 @@ function getRightItem(item){
     let food=parseToNode(foodhtml)[0];
     //遍历allData，如果存在就插入allData值
     allData.forEach(items=>{
-        //console.log(item);
         if(items.itemData.id===item.id) {
             food=items;
         }})
@@ -102,83 +105,8 @@ function getRightItem(item){
     return food
 }
 
-////生成食品数据方法
-//function foodData(data){
-//    const {name,spus}=data;
-//    let foodhtml = '';
-//    const foodright=_('.s-view-food-right')
-//    const rightfood=parseToNode(righttemp.replace('__species__', name) )[0];
-//    foodright.appendChild(rightfood);
-//    //console.log(spus.length)
-//    //遍历生成每个食品数据方法
-//    spus.forEach((spus,i)=> {
-//        //同步购物车与页面中的数字方法
-//        numbersData(spus,car)
-//        const {
-//            name,
-//            description,
-//            praise_content,
-//            min_price,
-//            picture
-//        }=spus;
-//        foodhtml += foodtemp
-//            .replace('__name__', name)
-//            .replace('__material__', description)
-//            .replace('__praise__', praise_content)
-//            .replace('__price__', min_price)
-//            .replace('__imgPath__',picture)
-//        let food=parseToNode(foodhtml)[i];
-//        const plus=food.querySelector('.food-plus');
-//        const minus=food.querySelector('.food-minus');
-//        const numbers=food.querySelector('.food-number');
-//        //遍历allData，如果存在就插入allData值
-//        allData.forEach(item=>{
-//            if(item.itemData===spus) {
-//                item.querySelector(".food-number").textContent = item.numberData;
-//                food=item;
-//            }})
-//        foodright.appendChild(food);
-//        food.itemData = spus;
-//        //给每个加号减号添加事件
-//        let number=numbers.innerHTML;
-//        //保留数量
-//        plus.addEventListener('click', e => {
-//            //数组去重
-//            allData.forEach(item=>{
-//                if(item.itemData===spus) {
-//                    allData.pop();number=item.numberData}
-//            })
-//            number++
-//            food.numberData=number;
-//            allData.push(food);
-//            numbers.innerHTML=number;
-//            spus.number=number;
-//            _('.s-footer-left-total').textContent="￥"+carData();
-//        })
-//        minus.addEventListener('click', e => {
-//            if(number===0){return;}
-//            //数组去重
-//            allData.forEach(item=>{
-//                if(item.itemData===spus){
-//                    allData.pop();number=item.numberData}
-//            })
-//            number--;
-//            food.numberData=number;
-//            allData.push(food);
-//            numbers.innerHTML=number;
-//            spus.number=number;
-//            //数组去0
-//            car.forEach(cars=>{
-//                if(cars.num==0)car.pop();
-//            })
-//            _('.s-footer-left-total').textContent="￥"+carData();
-//        })
-//    })
-//}
-
 //同步购物车与页面中的数字方法
 function numbersData(spus,car){
-    //console.log(spus,car)
     car.forEach(item=>{
         const {food,num}=item;
         if(food.id===spus.id){

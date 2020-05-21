@@ -3,6 +3,7 @@ const temp=`
     <div class="s-footer-container ">
     <div class="s-footer-left">
                 <img class="s-footer-left-icon" src="../../assets/img/shop-icon.png">
+                <i class="s-footer-left-red-dot" data-total-good-num="0">0</i>
                 <div class="s-footer-left-text">
                     <p class="s-footer-left-total">__total__</p>
                     <p class="s-footer-left-TSfee">__TSfee__</p>

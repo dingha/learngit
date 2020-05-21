@@ -111,6 +111,8 @@
     <Content Include="common\js\vender\swiper.css" />
     <Content Include="common\js\vender\swiper.min.css" />
     <Content Include="common\js\vender\swiper.min.js" />
+    <Content Include="components\contoast\index.css" />
+    <Content Include="components\contoast\index.js" />
     <Content Include="components\toast\index.css" />
     <Content Include="components\toast\index.js" />
     <Content Include="components\index.js" />
@@ -127,6 +129,7 @@
     <Content Include="components\topBar\index.js" />
     <Content Include="utlis\EventEmitter.js" />
     <Content Include="utlis\index.js" />
+    <Content Include="utlis\initFactory.js" />
     <Content Include="utlis\scrollToEnd.js" />
     <Content Include="utlis\utils.js" />
     <Content Include="views\home\constants.js" />
@@ -149,6 +152,7 @@
     <Content Include="views\order\index.js" />
     <Content Include="views\shopping\carbottom\carbottom.css" />
     <Content Include="views\shopping\carbottom\carbottom.js" />
+    <Content Include="views\shopping\constants.js" />
     <Content Include="views\shopping\index.css" />
     <Content Include="views\shopping\index.html" />
     <Content Include="views\shopping\index.js" />

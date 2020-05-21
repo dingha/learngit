@@ -1,5 +1,7 @@
 ﻿import {parseToNode,_,emitter} from '../../../utlis/index.js'
 import {getShoppingMainData} from '../../../api/index.js';
+
+import InitFactory from '../../../utlis/initFactory.js';
 const foodleft = _('.s-view-food-left');
 
 const temp =`
@@ -8,31 +10,40 @@ const temp =`
             __specie__</div>
         `
 
-//生成左侧商品类别方法
-getShoppingMainData().then(data=>{
-    data=data.food_spu_tags;
-    data.forEach((item,i)=> {handleData(item,i)});
-})
+class LeftNav extends InitFactory{
+    beforeMount(){
+        //默认第一个被点击
+    }
+    getData( ){
+        return getShoppingMainData();
+    }
 
-//函数重写
-function handleData(item,i){
-    //默认第一个被点击
-    const el=_handleData(item);
-    el.click();
-    handleData=_handleData;
+    handleData( ){
+        //默认第一个被点击
+        let is0k=true;
+        emitter.on('data-leftel',e=>{
+            if (is0k===true)
+                e.click();;is0k=false});
+    }
+
+    mounted( ){
+        const data=this.data.food_spu_tags;
+        data.forEach((item)=> {
+            const {name,spus,icon}=item;
+            const html= temp
+             .replace('__specie__', name)
+             .replace('__imgSpecies__', (icon)?`<img src="${icon}"/>` :icon);
+
+            const el=parseToNode(html)[0];
+            el.itemData=item;
+            el.addEventListener('click',handleClick);
+
+            emitter.emit('data-leftel',el);
+            return foodleft.appendChild(el);
+        } )
+    }
 }
-
-function _handleData(item,i){
-    const {name,spus,icon}=item;
-    const html= temp
-     .replace('__specie__', name)
-     .replace('__imgSpecies__', (icon)?`<img src="${icon}"/>` :icon);
-
-    const el=parseToNode(html)[0];
-    el.itemData=item;
-    el.addEventListener('click',handleClick);
-    return foodleft.appendChild(el);
-}
+new LeftNav();
 
 //点击事件方法
 function handleClick(){

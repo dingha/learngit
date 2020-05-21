@@ -1,7 +1,7 @@
 ﻿import {_,parseToNode,emitter} from '../../utlis/index.js';
 import {getHomeNavData} from '../../api/home.js';
 import {rederLoading} from '../../components/index.js'
-//import {DATA_HANDLE} from './constants.js'
+import InitFactory from '../../utlis/initFactory.js';
 
 const swiperWrapper = _('.swiper-wrapper');
 
@@ -12,7 +12,6 @@ swiperWrapper.appendChild(loadingEl);
 emitter.on('data-handled',()=>{
     loadingEl.remove();
 })
-
 
 //轮播框样式
 const
@@ -30,29 +29,30 @@ const itemTemp = `
         </div>
              `
 
-//emitter.on(DATA_HANDLE,()=>{
-//    new Swiper(".swiper-contatainer")
-//})
-
-//删除loadingEl加载框 //获取json数据并且每8个放入轮播内
-getHomeNavData().then(data=> {
-    handleData(data)
-    new Swiper('.swiper-container');
-})
-
-
-function handleData(data){
-    let iterations = Math.ceil(data.length/8);
-
-    while (iterations--) {
-        let html = '';
-        for (let i = 0, item; i < 8 && (item = data.shift()) ; i++) {
-            const{url,name}=item
-            html += itemTemp
-                .replace('__imgPath__', url)
-                .replace('__name__', name)
-        }
-        swiperWrapper.appendChild(parseToNode(temp.replace('__slide__', html))[0])
+class HomeNav extends InitFactory{
+    beforeMount(){
+        emitter.on(this.DATA_HANDLED,()=>{
+            new Swiper('.swiper-container');
+        })
     }
-    emitter.emit('data-handled')
+    getData( ){
+        return getHomeNavData();
+    }
+
+    handleData( ){
+        const data=this.data;
+        let iterations = Math.ceil(data.length/8);
+
+        while (iterations--) {
+            let html = '';
+            for (let i = 0, item; i < 8 && (item = data.shift()) ; i++) {
+                const{url,name}=item
+                html += itemTemp
+                    .replace('__imgPath__', url)
+                    .replace('__name__', name)
+            }
+            swiperWrapper.appendChild(parseToNode(temp.replace('__slide__', html))[0])
+        }
+    }
 }
+new HomeNav();

@@ -2,6 +2,7 @@
 @import './left/left.css';
 @import './right/right.css';
 @import './carbottom/carbottom.css';
+@import '../../components/shoppingTab/index.css';
 
 * {
     font-size: var(--font-size-normal);
@@ -94,4 +95,45 @@ nav {
     display: flex;
     width: 100%;
     height: calc(100% - 2rem - 3px);
+}
+
+/*总弹框样式*/
+.contoast {
+    z-index: 11;
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%,-50%,0);
+    width: 80%;
+    height: 20%;
+    box-shadow: 0 0 3px rgba(0,0,0,0.6);
+}
+/*文本样式*/
+.contoast-text {
+    text-align: center;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate3d(-50%,-50%,0);
+    width: 80%;
+    height: 30%;
+}
+/*总确认取消样式*/
+.submits {
+    position: absolute;
+    display: flex;
+    top: 65%;
+    left: 50%;
+    transform: translate3d(-50%,-50%,0);
+    width: 80.5%;
+    height: 25%;
+}
+
+.ok, .no {
+    flex: 1;
+    padding: 3% 0%;
+    text-align: center;
+    margin: 0% 7% 0% 7%;
+    box-shadow: 0 0 1px rgba(0,0,0,1);
 }

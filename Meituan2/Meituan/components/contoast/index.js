@@ -7,12 +7,18 @@ getToast =getsingle(getToast);
 let showing=false;
 
 //取到返回的text，并显示到提示框中
-export default (text) =>{
+export default ({text,event}) =>{
     if(showing) return;
     showing=true;
     const toastEL= getToast();
-    toastEL.querySelector('.toast-text').textContent=text;
-    showToast(toastEL)&&hideToast(toastEL);
+    const ok= toastEL.querySelector('.ok');
+    const no= toastEL.querySelector('.no');
+    no.addEventListener('click',e=>{handNo(toastEL)});
+    ok.addEventListener('click',e=>{event(); handNo(toastEL);});
+    toastEL.querySelector('.contoast-text').textContent=text;
+    showToast(toastEL)
+
+    //console.log(toastEL)
 }
 //显示提示框
 function showToast(el){
@@ -22,25 +28,26 @@ function showToast(el){
     },10)
     return true;
 }
+
 //取消提示框
-function hideToast(el){
+function handNo(el){
     setTimeout(()=>{
         el.classList.remove('show')
         showing=false;
         setTimeout(()=>{el.remove()},300)
-    },3000)
+    },30)
 }
 
 function getToast() {
-    const toastEL=parseToNode(temp)[0]
+    const toastEL=parseToNode(contemp)[0]
     return toastEL;
 }
 
-const temp =`
-    <div class="toast">
-        <p class="toast-text"></p>
-    </div>
-`
+//const temp =`
+//    <div class="toast">
+//        <p class="toast-text"></p>
+//    </div>
+//`
 const contemp =`
 
     <div class="contoast">
