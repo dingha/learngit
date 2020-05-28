@@ -1,0 +1,12 @@
+<!--  -->
+<template>
+  <div class>下</div>
+</template>
+
+<script>
+export default {
+  name: ""
+};
+</script>
+<style lang='scss' scoped>
+</style>
