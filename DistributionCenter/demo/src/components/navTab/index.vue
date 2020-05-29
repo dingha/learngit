@@ -1,8 +1,6 @@
 <!--  -->
 <template>
   <div class>
-    <van-button type="default" to="/home">默认按钮</van-button>
-    <van-button type="warning" to="/home/about">警告按钮</van-button>
     <van-tabbar v-model="active" active-color="red" inactive-color="#000">
       <van-tabbar-item to="/home">
         <span>首页</span>
@@ -11,27 +9,28 @@
         </template>
       </van-tabbar-item>
 
-      <van-tabbar-item to="/home/about">
+      <van-tabbar-item to="/class">
         <span>分类</span>
         <template #icon="props">
           <img :src="props.active ? icon.classred : icon.classgray" />
         </template>
       </van-tabbar-item>
 
-      <van-tabbar-item>
+      <van-tabbar-item to="/kill">
         <span>秒杀</span>
         <template #icon="props">
           <img :src="props.active ? icon.secondsred : icon.secondsgray" />
         </template>
       </van-tabbar-item>
 
-      <van-tabbar-item>
+      <van-tabbar-item to="/car">
         <span>购物车</span>
         <template #icon="props">
           <img :src="props.active ? icon.carred : icon.cargray" />
         </template>
       </van-tabbar-item>
-      <van-tabbar-item>
+
+      <van-tabbar-item to="/my">
         <span>我的</span>
         <template #icon="props">
           <img :src="props.active ? icon.myred : icon.mygray" />

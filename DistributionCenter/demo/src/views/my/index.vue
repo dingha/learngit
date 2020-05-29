@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div class>中</div>
+  <div class>这是我的页面</div>
 </template>
 
 <script>

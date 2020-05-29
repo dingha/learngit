@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div class>下</div>
+  <div class>这是秒杀页面</div>
 </template>
 
 <script>

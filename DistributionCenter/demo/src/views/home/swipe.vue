@@ -1,0 +1,42 @@
+<!--  -->
+<template>
+  <div class="d-home-swipe">
+    <van-swipe :autoplay="3111000" style="height:4.0rem;" indicator-color="red">
+      <van-swipe-item v-for="(image, index) in images" :key="index">
+        <img v-lazy="image" />
+      </van-swipe-item>
+    </van-swipe>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "",
+  data() {
+    return {
+      images: [
+        require("../..//assets/png/home_banner1.png"),
+        require("../..//assets/png/home_banner2.png"),
+        require("../..//assets/png/home_banner3.png")
+      ]
+    };
+  }
+};
+</script>
+<style lang='scss' scoped>
+.d-home-swipe {
+  padding: 0.1rem 0.2rem;
+  background: rgba(241, 241, 241, 1);
+  /deep/ {
+    .van-swipe__indicators {
+      left: 90%;
+      bottom: 15%;
+    }
+  }
+}
+.van-swipe-item {
+  img {
+    width: 100%;
+  }
+}
+</style>

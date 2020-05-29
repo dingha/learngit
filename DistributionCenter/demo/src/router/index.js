@@ -6,22 +6,38 @@ Vue.use(VueRouter);
 // 这里写底部切换的不同视口路径
 const HomeChildren =[
   {
-    path: "/home/about",
-    name: "/home/about",
-    component: () => import(/* webpackChunkName: "about" */ "../views/Home.vue")
+    path: "/home",
+    name: "home",
+    component: () => import(/* webpackChunkName: "about" */ "../views/home/index.vue")
   },
   {
-    path: "/home",
-    name: "/home/about",
+    path: "/class",
+    name: "class",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  }
+      import(/* webpackChunkName: "about" */ "../views/class/index.vue")
+  },
+  {
+    path: "/kill",
+    name: "kill",
+    component: () => import(/* webpackChunkName: "about" */ "../views/kill/index.vue")
+  },
+  {
+    path: "/car",
+    name: "car",
+    component: () => import(/* webpackChunkName: "about" */ "../views/car/index.vue")
+  },
+  {
+    path: "/my",
+    name: "my",
+    component: () => import(/* webpackChunkName: "about" */ "../views/my/index.vue")
+  },
 ];
 
 const routes = [
   {
     path: "/",
-    name: "home",
+    name: "/",
+    redirect: "/home",
     component: () =>
       import(/* webpackChunkName: "about" */ "../layout/layout.vue"),
     children: HomeChildren

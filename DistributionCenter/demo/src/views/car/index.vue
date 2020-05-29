@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div class>上</div>
+  <div class>这是购物车页面</div>
 </template>
 
 <script>
