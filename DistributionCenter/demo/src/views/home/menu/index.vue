@@ -18,17 +18,20 @@ export default {
   data() {
     return {
       images: [
-        require("../..//assets/icon/全屋定制@3x.png"),
-        require("../..//assets/icon/智能家居@3x.png"),
-        require("../..//assets/icon/预约搭配@3x.png"),
-        require("../..//assets/icon/体验馆@3x.png")
+        require("../../../assets/icon/全屋定制@3x.png"),
+        require("../../../assets/icon/智能家居@3x.png"),
+        require("../../../assets/icon/预约搭配@3x.png"),
+        require("../../../assets/icon/体验馆@3x.png")
       ],
       names: ["全屋定制", "智能家居", "预约搭配", "体验馆"]
     };
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
+.d-home-menu {
+  padding: 0.1rem 0rem;
+}
 .van-grid-item {
   img {
     width: 0.8rem;

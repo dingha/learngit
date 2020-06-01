@@ -21,13 +21,11 @@ export default {
 <style lang="scss" scoped>
 .d-container {
   height: 100%;
-  overflow-y: auto;
   position: relative;
 }
 
-.d-view-containe {
+.d-view-container {
   height: calc(100% - 1rem - 3px);
-  overflow: auto;
 }
 
 .d-footer-container {
