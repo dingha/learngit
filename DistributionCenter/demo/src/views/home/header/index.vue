@@ -27,7 +27,7 @@ export default {
 <style lang='scss' scoped>
 .d-home-heade {
   display: flex;
-  //   padding: 0rem 0.5rem;
+  height: 1rem;
 }
 .d-home-heade-city {
   padding-top: 0.36rem;

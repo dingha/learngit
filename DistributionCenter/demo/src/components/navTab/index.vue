@@ -16,13 +16,6 @@
         </template>
       </van-tabbar-item>
 
-      <van-tabbar-item to="/kill">
-        <span>秒杀</span>
-        <template #icon="props">
-          <img :src="props.active ? icon.secondsred : icon.secondsgray" />
-        </template>
-      </van-tabbar-item>
-
       <van-tabbar-item to="/car">
         <span>购物车</span>
         <template #icon="props">
@@ -53,8 +46,6 @@ export default {
         homegrey: require("../../assets/icon/homegrey@3x.png"),
         classgray: require("../../assets/icon/classgray@2x.png"),
         classred: require("../../assets/icon/classred@3x.png"),
-        secondsgray: require("../../assets/icon/secondsgray@3x.png"),
-        secondsred: require("../../assets/icon/secondsred@3x.png"),
         cargray: require("../../assets/icon/cargray@3x.png"),
         carred: require("../../assets/icon/carred@3x.png"),
         mygray: require("../../assets/icon/mygray@3x.png"),

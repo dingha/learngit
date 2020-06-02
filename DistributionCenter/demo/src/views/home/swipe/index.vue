@@ -35,7 +35,9 @@ export default {
 }
 .van-swipe-item {
   img {
+    object-fit: cover;
     width: 100%;
+    height: 100%;
   }
 }
 </style>
