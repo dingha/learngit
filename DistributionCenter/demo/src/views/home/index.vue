@@ -11,7 +11,7 @@
       <housebox />
       <designerbox />
       <goodsbox />
-      <div class="d-home-menu">这是菜单</div>
+      <experiencebox />
     </div>
   </div>
 </template>
@@ -26,6 +26,7 @@ import videobox from "./video/index";
 import housebox from "./house/index";
 import designerbox from "./designer/index";
 import goodsbox from "./goods/index";
+import experiencebox from "./experience/index";
 
 export default {
   name: "footertab",
@@ -38,7 +39,8 @@ export default {
     videobox,
     housebox,
     designerbox,
-    goodsbox
+    goodsbox,
+    experiencebox
   }
 };
 </script>

@@ -6,7 +6,24 @@ import "./common/css/index.css";
 // eslint-disable-next-line no-unused-vars
 import axios from 'axios';
 // eslint-disable-next-line no-unused-vars
-import { Button, Tabbar, TabbarItem, Search, Icon, Col, Row , Swipe, SwipeItem,Lazyload ,Grid, GridItem ,Image as VanImage} from "vant";
+import {
+  Button,
+  Tabbar,
+  TabbarItem,
+  Search,
+  Icon,
+  Col,
+  Row,
+  Swipe,
+  SwipeItem,
+  Lazyload,
+  Grid,
+  GridItem,
+  Image as VanImage,
+  IndexBar,
+  IndexAnchor,
+  Cell
+} from "vant";
 
 import a from "utils";
 a();
@@ -20,11 +37,14 @@ Vue.use(TabbarItem);
 Vue.use(Swipe);
 Vue.use(SwipeItem);
 Vue.use(Lazyload, {
-  lazyComponent: true,
+  lazyComponent: true
 });
 Vue.use(Grid);
 Vue.use(GridItem);
 Vue.use(VanImage);
+Vue.use(IndexBar);
+Vue.use(IndexAnchor);
+Vue.use(Cell);
 Vue.config.productionTip = false;
 
 new Vue({

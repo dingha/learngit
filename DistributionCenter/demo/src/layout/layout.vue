@@ -25,7 +25,6 @@ export default {
 }
 
 .d-view-container {
-  // height: calc(100% - 1rem - 3px);
   height: calc(91.9%);
 }
 

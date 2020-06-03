@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div class="d-home-heade">
-    <div class="d-home-heade-city">
+    <div @click="gotolink" class="d-home-heade-city">
       <label>杭州</label>
       <van-icon name="arrow-down" />
     </div>
@@ -21,7 +21,17 @@
 
 <script>
 export default {
-  name: ""
+  name: "",
+  methods: {
+    gotolink() {
+      //点击跳转至上次浏览页面
+      // this.$router.go(-1)
+
+      //指定跳转地址
+      this.$router.push({ path: "/home/positioning" });
+      // this.$router.replace("./positioning");
+    }
+  }
 };
 </script>
 <style lang='scss' scoped>
