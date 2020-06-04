@@ -3,7 +3,7 @@
   <div class="d-home-swipe">
     <van-swipe :autoplay="3110" style="height:4.0rem;" indicator-color="red">
       <van-swipe-item v-for="(image, index) in images" :key="index">
-        <img v-lazy="image" />
+        <img @click="gotoparameter" v-lazy="image" />
       </van-swipe-item>
     </van-swipe>
   </div>
@@ -12,6 +12,11 @@
 <script>
 export default {
   name: "",
+  methods: {
+    gotoparameter() {
+      this.$router.push({ path: "/home/parameter" });
+    }
+  },
   data() {
     return {
       images: [

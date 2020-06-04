@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import positionings from "../views/home/header/positioning.vue";
 
 Vue.use(VueRouter);
 //这里写home页面切换的不同视口路径
@@ -34,7 +33,7 @@ const bottomChildren = [
     path: "/my",
     name: "my",
     component: () =>
-      import(/* webpackChunkName: "my" */ "../views/my/index.vue")
+      import(/* webpackChunkName: "my" */ "../views/home/header/positioning.vue")
   }
 ];
 
@@ -50,7 +49,42 @@ const routes = [
   {
     name: "/home/positioning",
     path: "/home/positioning",
-    component: positionings
+    component:() =>
+      import(
+        /* webpackChunkName: "positioning" */ "../views/home/header/positioning.vue"
+      )
+  },
+  {
+    name: "/home/parameter",
+    path: "/home/parameter",
+    component:() =>
+      import(
+        /* webpackChunkName: "parameter" */ "../views/home/goods/parameter.vue"
+      )
+  },
+  {
+    name: "/home/searchgoods",
+    path: "/home/searchgoods",
+    component:() =>
+      import(
+        /* webpackChunkName: "searchgoods" */ "../views/home/header/searchgoods.vue"
+      )
+  },
+  {
+    name: "/home/evaluation",
+    path: "/home/evaluation",
+    component:() =>
+      import(
+        /* webpackChunkName: "evaluation" */ "../views/home/goods/evaluation.vue"
+      )
+  },
+  {
+    name: "/home/login",
+    path: "/home/login",
+    component:() =>
+      import(
+        /* webpackChunkName: "evaluation" */ "../views/login/index.vue"
+      )
   }
 ];
 

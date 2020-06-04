@@ -4,7 +4,7 @@
     <form action="/">
       <van-search show-action left-icon left placeholder="请输入城市/拼音">
         <template #left>
-          <van-icon size=".40rem" name="arrow-left" />
+          <van-icon @click="backHistory" size=".40rem" name="arrow-left" />
         </template>
         <template #action>
           <div>搜索</div>
@@ -54,6 +54,12 @@
 <script>
 export default {
   name: "",
+  methods: {
+    backHistory() {
+      //点击跳转至上次浏览页面
+      this.$router.go(-1);
+    }
+  },
   data() {
     return {
       indexList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],

@@ -22,7 +22,16 @@ import {
   Image as VanImage,
   IndexBar,
   IndexAnchor,
-  Cell
+  Cell,
+  NavBar,
+  Tag,
+  CellGroup,
+  List,Loading,
+  Tab,
+  Tabs,
+  GoodsAction, GoodsActionIcon, GoodsActionButton,
+  Sku,
+  Field
 } from "vant";
 
 import a from "utils";
@@ -45,6 +54,17 @@ Vue.use(VanImage);
 Vue.use(IndexBar);
 Vue.use(IndexAnchor);
 Vue.use(Cell);
+Vue.use(NavBar);
+Vue.use(Tag);
+Vue.use(CellGroup);
+Vue.use(List, Loading);
+Vue.use(Tab);
+Vue.use(Tabs);
+Vue.use(GoodsAction);
+Vue.use(GoodsActionButton);
+Vue.use(GoodsActionIcon);
+Vue.use(Sku);
+Vue.use(Field);
 Vue.config.productionTip = false;
 
 new Vue({

@@ -6,6 +6,7 @@
       <van-icon name="arrow-down" />
     </div>
     <van-search
+      @click="gotogoods"
       shape="round"
       label="商品"
       maxlength="15"
@@ -24,12 +25,10 @@ export default {
   name: "",
   methods: {
     gotolink() {
-      //点击跳转至上次浏览页面
-      // this.$router.go(-1)
-
-      //指定跳转地址
       this.$router.push({ path: "/home/positioning" });
-      // this.$router.replace("./positioning");
+    },
+    gotogoods() {
+      this.$router.push({ path: "/home/searchgoods" });
     }
   }
 };
