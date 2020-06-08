@@ -31,7 +31,14 @@ import {
   Tabs,
   GoodsAction, GoodsActionIcon, GoodsActionButton,
   Sku,
-  Field
+  Field,
+  Divider ,
+  Form,
+  Sidebar, SidebarItem,
+  Collapse, CollapseItem,
+  SubmitBar,
+  Checkbox,CheckboxGroup,
+  Card 
 } from "vant";
 
 import a from "utils";
@@ -64,7 +71,17 @@ Vue.use(GoodsAction);
 Vue.use(GoodsActionButton);
 Vue.use(GoodsActionIcon);
 Vue.use(Sku);
-Vue.use(Field);
+Vue.use(Field); 
+Vue.use(Divider);
+Vue.use(Form);
+Vue.use(Sidebar);
+Vue.use(SidebarItem);
+Vue.use(Collapse);
+Vue.use(CollapseItem);
+Vue.use(SubmitBar);
+Vue.use(Checkbox);
+Vue.use(CheckboxGroup);
+Vue.use(Card);
 Vue.config.productionTip = false;
 
 new Vue({
