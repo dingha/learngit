@@ -1,0 +1,59 @@
+.hairline-top,
+.hairline-bottom,
+.hairline-left,
+.hairline-right,
+.hairline-top-bottom,
+.hairline-left-right,
+.hairline-surround {
+    position: relative;
+}
+
+.hairline-top::after,
+.hairline-bottom::after,
+.hairline-left::after,
+.hairline-right::after,
+.hairline-top-bottom::after,
+.hairline-left-right::after,
+.hairline-surround::after {
+    content: "";
+    position: absolute;
+    width: 250%;
+    height: 250%;
+    top: 0;
+    left: 0;
+    transform-origin: top left;
+    transform: scale(0.4);
+    pointer-events: none;
+    overflow: hidden; /*溢出*/
+    z-index: 2;
+}
+
+.hairline-top::after {
+    border-top: var(--border-normal);
+}
+
+.hairline-bottom::after {
+    border-bottom: var(--border-normal);
+}
+
+.hairline-left::after {
+    border-left: var(--border-normal);
+}
+
+.hairline-right::after {
+    border-right: var(--border-normal);
+}
+
+.hairline-top-bottom::after {
+    border-top: var(--border-normal);
+    border-bottom: var(--border-normal);
+}
+
+.hairline-left-right::after {
+    border-left: var(--border-normal);
+    border-left: var(--border-normal);
+}
+
+.hairline-surround::after {
+    border: var(--border-normal);
+}

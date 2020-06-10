@@ -6,7 +6,43 @@ import "./common/css/index.css";
 // eslint-disable-next-line no-unused-vars
 import axios from 'axios';
 // eslint-disable-next-line no-unused-vars
-import { Button, Tabbar, TabbarItem, Search, Icon, Col, Row , Swipe, SwipeItem,Lazyload ,Grid, GridItem ,Image as VanImage} from "vant";
+import {
+  Button,
+  Tabbar,
+  TabbarItem,
+  Search,
+  Icon,
+  Col,
+  Row,
+  Swipe,
+  SwipeItem,
+  Lazyload,
+  Grid,
+  GridItem,
+  Image as VanImage,
+  IndexBar,
+  IndexAnchor,
+  Cell,
+  NavBar,
+  Tag,
+  CellGroup,
+  List,Loading,
+  Tab,
+  Tabs,
+  GoodsAction, GoodsActionIcon, GoodsActionButton,
+  Sku,
+  Field,
+  Divider ,
+  Form,
+  Sidebar, SidebarItem,
+  Collapse, CollapseItem,
+  SubmitBar,
+  Checkbox,CheckboxGroup,
+  Card,
+  Stepper,
+  CountDown,
+  RadioGroup, Radio
+} from "vant";
 
 import a from "utils";
 a();
@@ -20,11 +56,39 @@ Vue.use(TabbarItem);
 Vue.use(Swipe);
 Vue.use(SwipeItem);
 Vue.use(Lazyload, {
-  lazyComponent: true,
+  lazyComponent: true
 });
 Vue.use(Grid);
 Vue.use(GridItem);
 Vue.use(VanImage);
+Vue.use(IndexBar);
+Vue.use(IndexAnchor);
+Vue.use(Cell);
+Vue.use(NavBar);
+Vue.use(Tag);
+Vue.use(CellGroup);
+Vue.use(List, Loading);
+Vue.use(Tab);
+Vue.use(Tabs);
+Vue.use(GoodsAction);
+Vue.use(GoodsActionButton);
+Vue.use(GoodsActionIcon);
+Vue.use(Sku);
+Vue.use(Field); 
+Vue.use(Divider);
+Vue.use(Form);
+Vue.use(Sidebar);
+Vue.use(SidebarItem);
+Vue.use(Collapse);
+Vue.use(CollapseItem);
+Vue.use(SubmitBar);
+Vue.use(Checkbox);
+Vue.use(CheckboxGroup);
+Vue.use(Card);
+Vue.use(Stepper);
+Vue.use(CountDown);
+Vue.use(Radio);
+Vue.use(RadioGroup);
 Vue.config.productionTip = false;
 
 new Vue({

@@ -25,7 +25,7 @@ export default {
 }
 
 .d-view-container {
-  height: calc(100% - 1rem - 3px);
+  height: calc(91.9%);
 }
 
 .d-footer-container {
@@ -33,6 +33,7 @@ export default {
   bottom: 0;
   left: 0;
   width: 100%;
+  height: 8.1%;
 }
 
 #nav {

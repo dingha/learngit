@@ -38,7 +38,10 @@ import {
   Collapse, CollapseItem,
   SubmitBar,
   Checkbox,CheckboxGroup,
-  Card 
+  Card,
+  Stepper,
+  CountDown,
+  RadioGroup, Radio
 } from "vant";
 
 import a from "utils";
@@ -82,6 +85,10 @@ Vue.use(SubmitBar);
 Vue.use(Checkbox);
 Vue.use(CheckboxGroup);
 Vue.use(Card);
+Vue.use(Stepper);
+Vue.use(CountDown);
+Vue.use(Radio);
+Vue.use(RadioGroup);
 Vue.config.productionTip = false;
 
 new Vue({

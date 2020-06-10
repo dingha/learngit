@@ -1,46 +1,174 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import home from "../views/Home/home.vue";
 
 Vue.use(VueRouter);
+
 // 这里写底部切换的不同视口路径
-const HomeChildren =[
-  {
+const bottomChildren = [{
     path: "/home",
     name: "home",
-    component: () => import(/* webpackChunkName: "about" */ "../views/home/index.vue")
+    component: () =>
+      import( /* webpackChunkName: "home" */ "../views/home/index.vue")
   },
   {
     path: "/class",
     name: "class",
+    redirect: "/class/category",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/class/index.vue")
+      import( /* webpackChunkName: "class" */ "../views/class/index.vue"),
+    children: [{
+        path: "/class/category",
+        name: "class/category",
+        component: () =>
+          import( /* webpackChunkName: "class" */ "../views/class/category.vue")
+      },
+      {
+        path: "/class/space",
+        name: "class/space",
+        component: () =>
+          import( /* webpackChunkName: "class" */ "../views/class/space.vue")
+      },
+      {
+        path: "/class/style",
+        name: "class/style",
+        component: () =>
+          import( /* webpackChunkName: "class" */ "../views/class/style.vue")
+      }
+    ]
   },
   {
     path: "/kill",
     name: "kill",
-    component: () => import(/* webpackChunkName: "about" */ "../views/kill/index.vue")
+    component: () =>
+      import( /* webpackChunkName: "kill" */ "../views/kill/index.vue")
   },
   {
     path: "/car",
     name: "car",
-    component: () => import(/* webpackChunkName: "about" */ "../views/car/index.vue")
+    redirect: "/car/empty",
+    component: () =>
+      import( /* webpackChunkName: "car" */ "../views/car/index.vue"),
+    children: [{
+        path: "/car/empty",
+        name: "car/empty",
+        component: () =>
+          import( /* webpackChunkName: "car" */ "../views/car/empty.vue")
+      },
+      {
+        path: "/car/Thereare",
+        name: "car/Thereare",
+        component: () =>
+          import( /* webpackChunkName: "car" */ "../views/car/Thereare.vue")
+      },
+      {
+        path: "/car/editor",
+        name: "car/editor",
+        component: () =>
+          import( /* webpackChunkName: "car" */ "../views/car/editor.vue")
+      }
+    ]
+  },
+  {
+    path: "/car/messageboard",
+    name: "car/messageboard",
+    component: () =>
+      import( /* webpackChunkName: "car" */ "../views/car/messageboard.vue")
   },
   {
     path: "/my",
     name: "my",
-    component: () => import(/* webpackChunkName: "about" */ "../views/my/index.vue")
+    component: () =>
+      import( /* webpackChunkName: "my" */ "../views/my/index.vue")
+  }
+];
+//这里写login页面切换的不同视口路径
+const loginChildren = [{
+    name: "/login/login",
+    path: "/login/login",
+    component: () =>
+      import( /* webpackChunkName: "login" */ "../views/login/login.vue")
   },
+  {
+    name: "/login/welcome",
+    path: "/login/welcome",
+    component: () =>
+      import( /* webpackChunkName: "login" */ "../views/login/welcome.vue")
+  },
+  {
+    name: "/login/Setforgotten",
+    path: "/login/Setforgotten",
+    component: () =>
+      import( /* webpackChunkName: "login" */ "../views/login/Setforgotten.vue")
+  }
 ];
 
-const routes = [
-  {
+const routes = [{
     path: "/",
     name: "/",
     redirect: "/home",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../layout/layout.vue"),
-    children: HomeChildren
+      import( /* webpackChunkName: "home" */ "../layout/layout.vue"),
+    children: bottomChildren
+  },
+  {
+    name: "/home/positioning",
+    path: "/home/positioning",
+    component: () =>
+      import(
+        /* webpackChunkName: "home" */
+        "../views/home/header/positioning.vue"
+      )
+  },
+  {
+    name: "/home/parameter",
+    path: "/home/parameter",
+    component: () =>
+      import( /* webpackChunkName: "home" */ "../views/home/goods/parameter.vue")
+  },
+  {
+    name: "/home/searchgoods",
+    path: "/home/searchgoods",
+    component: () =>
+      import(
+        /* webpackChunkName: "home" */
+        "../views/home/header/searchgoods.vue"
+      )
+  },
+  {
+    name: "/home/evaluation",
+    path: "/home/evaluation",
+    component: () =>
+      import(
+        /* webpackChunkName: "home" */
+        "../views/home/goods/evaluation.vue"
+      )
+  },
+  {
+    name: "/login",
+    path: "/login",
+    redirect: "/login/login",
+    component: () =>
+      import( /* webpackChunkName: "login" */ "../views/login/index.vue"),
+    children: loginChildren
+  },
+  {
+    path: "/car/payment",
+    name: "car/payment",
+    component: () =>
+      import( /* webpackChunkName: "car" */ "../views/car/payment.vue")
+  },
+  {
+    path: "/car/confirm",
+    name: "car/confirm",
+    component: () =>
+      import( /* webpackChunkName: "car" */ "../views/car/confirm.vue")
+  },
+  {
+    name: "*",
+    path: "*",
+    redirect: "/login",
+    component: () =>
+      import( /* webpackChunkName: "evaluation" */ "../views/login/index.vue")
   }
 ];
 
