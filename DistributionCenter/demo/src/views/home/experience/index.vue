@@ -54,7 +54,7 @@ export default {
     }
     .d-home-recommend-experience-title-all {
       margin-left: auto;
-      color: rgba(0, 0, 0, 0.7);
+      color: rgba(162, 162, 162, 1);
     }
   }
 

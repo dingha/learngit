@@ -31,7 +31,8 @@ export default {
   components: navTabbox,
   methods: {
     gotolink() {
-      console.dir(navTabbox)
+      this.$route.query.active = "/car";
+      console.log(this.$route.query.active);
       //this.$refs.apptable.selectMember(this.params)
       // this.$router.push({ path: "/home/positioning" });
     },
@@ -39,7 +40,10 @@ export default {
       this.$router.push({ path: "/home/searchgoods" });
     },
     gotocar() {
-      this.$router.push({ path: "/car/Thereare" });
+      this.$router.push({
+        path: "/car",
+        query: { id: "/car" }
+      });
     }
   }
 };

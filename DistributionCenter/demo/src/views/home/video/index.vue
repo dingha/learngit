@@ -3,14 +3,14 @@
   <div class="d-home-recommend-video">
     <p class="d-home-recommend-video-title">
       <img src="../../../assets/png/home/视频@3x.png" alt />
-      <span class="d-home-recommend-video-title-title">主题推荐</span>
+      <span class="d-home-recommend-video-title-title">视频</span>
       <span class="d-home-recommend-video-title-all">全部></span>
     </p>
 
     <van-grid :column-num="2" :gutter="10">
-      <van-grid-item v-for="(image, index) in images" :key="index" text="艺高家居宣传片">
-        <img v-lazy="image" />
-        <label>{{ videotext[index] }}</label>
+      <van-grid-item v-for="(data, index) in datalist" :key="index" text="艺高家居宣传片">
+        <img v-lazy="data.image" />
+        <label>{{ data.name }}</label>
       </van-grid-item>
     </van-grid>
   </div>
@@ -21,23 +21,33 @@ export default {
   name: "",
   data() {
     return {
-      images: [
-        require("../../../assets/png/home/视频1@3x.png"),
-        require("../../../assets/png/home/视频2@3x.png"),
-        require("../../../assets/png/home/视频3@3x.png"),
-        require("../../../assets/png/home/视频4@3x.png")
-      ],
-      videotext: [
-        "艺高家居宣传片",
-        "艺高家居宣传片",
-        "艺高家居宣传片",
-        "艺高家居宣传片"
+      datalist: [
+        {
+          image: require("../../../assets/png/home/视频1@3x.png"),
+          name: "艺高家居宣传片",
+          path: ""
+        },
+        {
+          image: require("../../../assets/png/home/视频2@3x.png"),
+          name: "艺高家居宣传片",
+          path: ""
+        },
+        {
+          image: require("../../../assets/png/home/视频3@3x.png"),
+          name: "艺高家居宣传片",
+          path: ""
+        },
+        {
+          image: require("../../../assets/png/home/视频4@3x.png"),
+          name: "艺高家居宣传片",
+          path: ""
+        }
       ]
     };
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .d-home-recommend-video {
   margin: 0.2rem 0rem;
   padding: 0rem 0.2rem;
@@ -56,7 +66,7 @@ export default {
     }
     .d-home-recommend-video-title-all {
       margin-left: auto;
-      color: rgba(0, 0, 0, 0.7);
+      color: rgba(162, 162, 162, 1);
     }
   }
 

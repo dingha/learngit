@@ -4,6 +4,7 @@
     <div class="login-welcome-top">
       <div class="login-welcome-top-img">
         <van-image
+          @click="gotomy"
           width="30%"
           height="30%"
           fit="contain"
@@ -30,7 +31,15 @@
 
 <script>
 export default {
-  name: ""
+  name: "",
+  methods: {
+    gotomy() {
+      this.$router.push({
+        path: "/my",
+        query: { id: "/my" }
+      });
+    }
+  }
 };
 </script>
 <style lang='scss' scoped>

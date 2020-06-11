@@ -27,7 +27,7 @@
         </van-col>
       </van-row>
     </div>
-    <div class="d-home-parameter-bottom">
+    <div class="d-home-parameter-content">
       <van-cell-group>
         <van-cell title="用户评价" is-link @click="gotoevaluation" />
         <van-cell title="那些花儿" value="2017-05-26">
@@ -78,8 +78,18 @@
             </van-cell>
           </van-list>
         </van-tab>
-        <van-tab title="商品参数">内容 2</van-tab>
+        <van-tab class="van-tab__pane2" title="商品参数">
+          <van-cell title="商品风格" value="现代" />
+          <van-cell title="主要材料" value="白橡木" />
+          <van-cell title="产地" value="江苏苏州" />
+          <van-cell title="油漆工艺" value="环保漆" />
+          <van-cell title="商品毛重" value="30kg" />
+          <van-cell title="组装情况" value="组装" />
+        </van-tab>
       </van-tabs>
+    </div>
+
+    <div class="d-home-parameter-bottom">
       <van-goods-action>
         <van-goods-action-icon icon="chat-o" text="客服" />
         <van-goods-action-icon icon="cart-o" text="购物车" />
@@ -234,7 +244,8 @@ export default {
 </script>
 <style lang='scss' scoped>
 .d-home-parameter {
-  height: 100%;
+  width: 100%;
+  height: calc(100% - 50px);
   overflow: auto;
   background: rgba(241, 241, 241, 1);
   .d-home-parameter-top {
@@ -283,7 +294,7 @@ export default {
       }
     }
   }
-  .d-home-parameter-bottom {
+  .d-home-parameter-content {
     margin-top: 0.2rem;
     background: #fff;
     /deep/ {
@@ -298,6 +309,30 @@ export default {
         text-align: center;
       }
     }
+    .van-tabs {
+      .van-tabs__content {
+        .van-tab__pane2 {
+          .van-cell {
+            position: relative;
+            .van-cell__title {
+              color: #969799;
+            }
+            .van-cell__value {
+              flex: 3;
+              text-align: left;
+            }
+          }
+          .van-cell::after {
+            border-top-width: 1px;
+          }
+        }
+      }
+    }
+  }
+
+  .d-home-parameter-bottom {
+    width: 100%;
+    height: 50px;
   }
 }
 </style>

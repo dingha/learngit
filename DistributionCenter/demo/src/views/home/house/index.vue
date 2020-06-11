@@ -8,10 +8,10 @@
     </p>
     <div class="d-home-recommend-house-content">
       <van-grid direction="vertical" :gutter="0" :column-num="1">
-        <van-grid-item v-for="(image, index) in imagestop" :key="index">
-          <div class="d-home-recommend-house-content-top">
-            <img v-lazy="image" />
-            <p>北欧风格小屋全屋设计</p>
+        <van-grid-item v-for="(data, index) in datalist" :key="index">
+          <div @click="gotoparameter" class="d-home-recommend-house-content-top">
+            <img v-lazy="data.imagetop" />
+            <p>{{ data.name }}</p>
           </div>
           <div class="d-home-recommend-house-bottom">
             <van-grid direction="horizontal" :column-num="5" :gutter="0">
@@ -20,8 +20,8 @@
                 <span>{{ imagesbom[1].length }}</span>
                 件
               </div>
-              <van-grid-item v-for="(images, indexs) in imagesbom[index]" :key="indexs">
-                <img v-lazy="images" />
+              <van-grid-item v-for="(data, indexs) in data.imagesbom" :key="indexs">
+                <img v-lazy="data" />
               </van-grid-item>
             </van-grid>
           </div>
@@ -34,8 +34,51 @@
 <script>
 export default {
   name: "",
+  methods: {
+    gotoparameter() {
+      this.$router.push({ path: "/home/parameter" });
+    }
+  },
   data() {
     return {
+      datalist: [
+        {
+          imagetop: require("../../../assets/png/home/全屋定制1@3x.png"),
+          imagesbom: [
+            require("../../../assets/png/home/全屋小商品4@3x.png"),
+            require("../../../assets/png/home/全屋小商品1@3x.png"),
+            require("../../../assets/png/home/全屋小商品2@3x.png"),
+            require("../../../assets/png/home/全屋小商品3@3x.png"),
+            require("../../../assets/png/home/全屋小商品5@3x.png")
+          ],
+          name: "北欧风格小屋全屋设计",
+          path: ""
+        },
+        {
+          imagetop: require("../../../assets/png/home/全屋2@3x.png"),
+          imagesbom: [
+            require("../../../assets/png/home/全屋小商品4@3x.png"),
+            require("../../../assets/png/home/全屋小商品1@3x.png"),
+            require("../../../assets/png/home/全屋小商品2@3x.png"),
+            require("../../../assets/png/home/全屋小商品3@3x.png"),
+            require("../../../assets/png/home/全屋小商品5@3x.png")
+          ],
+          name: "北欧风格小屋全屋设计",
+          path: ""
+        },
+        {
+          imagetop: require("../../../assets/png/home/全屋3@3x.png"),
+          imagesbom: [
+            require("../../../assets/png/home/全屋小商品4@3x.png"),
+            require("../../../assets/png/home/全屋小商品1@3x.png"),
+            require("../../../assets/png/home/全屋小商品2@3x.png"),
+            require("../../../assets/png/home/全屋小商品3@3x.png"),
+            require("../../../assets/png/home/全屋小商品5@3x.png")
+          ],
+          name: "北欧风格小屋全屋设计",
+          path: ""
+        }
+      ],
       imagesbom: [
         [
           require("../../../assets/png/home/全屋小商品4@3x.png"),
@@ -87,7 +130,7 @@ export default {
     }
     .d-home-recommend-house-title-all {
       margin-left: auto;
-      color: rgba(0, 0, 0, 0.7);
+      color: rgba(162, 162, 162, 1);
     }
   }
 }

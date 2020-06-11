@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div class="login">
-    <van-nav-bar left-arrow />
+    <van-nav-bar left-arrow @click-left="onClickLeft" />
     <div class="login-top">
       <van-image
         width="60%"
@@ -128,6 +128,9 @@ export default {
     };
   },
   methods: {
+    onClickLeft() {
+      this.$router.go(-1);
+    },
     gotoSetforgotten() {
       this.$router.push({ path: "/login/Setforgotten" });
     }

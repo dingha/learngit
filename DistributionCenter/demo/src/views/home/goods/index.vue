@@ -8,15 +8,15 @@
     </p>
     <div class="d-home-recommend-house-content">
       <van-grid direction="horizontal" :gutter="0" :column-num="1">
-        <van-grid-item v-for="(image, index) in datalist" :key="index">
+        <van-grid-item v-for="(data, index) in datalist" :key="index">
           <div class="d-home-recommend-house-content-content">
             <p>客厅</p>
-            <img v-lazy="image[0].imagetop" />
+            <img v-lazy="data.imagetop" />
             <p>三抽屉欧式电视机柜</p>
             <label>288￥</label>
             <van-grid direction="vertical" :gutter="0" :column-num="2">
-              <van-grid-item v-for="(images, index) in image[1].imagebottom" :key="index">
-                <img v-lazy="images" />
+              <van-grid-item v-for="(datas, index) in data.imagebottom" :key="index">
+                <img v-lazy="datas" />
                 <p>三抽屉欧式电视机柜</p>
                 <label>288￥</label>
               </van-grid-item>
@@ -35,50 +35,46 @@ export default {
   data() {
     return {
       datalist: [
-        [
-          { imagetop: require("../../../assets/png/home/goods/1@3x.png") },
-          {
-            imagebottom: [
-              require("../../../assets/png/home/goods/2@3x.png"),
-              require("../../../assets/png/home/goods/3@3x.png"),
-              require("../../../assets/png/home/goods/4@3x.png"),
-              require("../../../assets/png/home/goods/5@3x.png")
-            ]
-          }
-        ],
-        [
-          { imagetop: require("../../../assets/png/home/goods/6@3x.png") },
-          {
-            imagebottom: [
-              require("../../../assets/png/home/goods/7@3x.png"),
-              require("../../../assets/png/home/goods/8@3x.png"),
-              require("../../../assets/png/home/goods/9@3x.png"),
-              require("../../../assets/png/home/goods/10@3x.png")
-            ]
-          }
-        ],
-        [
-          { imagetop: require("../../../assets/png/home/goods/11@3x.png") },
-          {
-            imagebottom: [
-              require("../../../assets/png/home/goods/12@3x.png"),
-              require("../../../assets/png/home/goods/13@3x.png"),
-              require("../../../assets/png/home/goods/4@3x.png"),
-              require("../../../assets/png/home/goods/15@3x.png")
-            ]
-          }
-        ],
-        [
-          { imagetop: require("../../../assets/png/home/goods/16@3x.png") },
-          {
-            imagebottom: [
-              require("../../../assets/png/home/goods/17@3x.png"),
-              require("../../../assets/png/home/goods/18@3x.png"),
-              require("../../../assets/png/home/goods/19@3x.png"),
-              require("../../../assets/png/home/goods/20@3x.png")
-            ]
-          }
-        ]
+        {
+          imagetop: require("../../../assets/png/home/goods/1@3x.png"),
+
+          imagebottom: [
+            require("../../../assets/png/home/goods/2@3x.png"),
+            require("../../../assets/png/home/goods/3@3x.png"),
+            require("../../../assets/png/home/goods/4@3x.png"),
+            require("../../../assets/png/home/goods/5@3x.png")
+          ]
+        },
+        {
+          imagetop: require("../../../assets/png/home/goods/6@3x.png"),
+
+          imagebottom: [
+            require("../../../assets/png/home/goods/7@3x.png"),
+            require("../../../assets/png/home/goods/8@3x.png"),
+            require("../../../assets/png/home/goods/9@3x.png"),
+            require("../../../assets/png/home/goods/10@3x.png")
+          ]
+        },
+        {
+          imagetop: require("../../../assets/png/home/goods/11@3x.png"),
+
+          imagebottom: [
+            require("../../../assets/png/home/goods/12@3x.png"),
+            require("../../../assets/png/home/goods/13@3x.png"),
+            require("../../../assets/png/home/goods/4@3x.png"),
+            require("../../../assets/png/home/goods/15@3x.png")
+          ]
+        },
+        {
+          imagetop: require("../../../assets/png/home/goods/16@3x.png"),
+
+          imagebottom: [
+            require("../../../assets/png/home/goods/17@3x.png"),
+            require("../../../assets/png/home/goods/18@3x.png"),
+            require("../../../assets/png/home/goods/19@3x.png"),
+            require("../../../assets/png/home/goods/20@3x.png")
+          ]
+        }
       ]
     };
   }
@@ -103,7 +99,8 @@ export default {
     }
     .d-home-recommend-house-title-all {
       margin-left: auto;
-      color: rgba(0, 0, 0, 0.7);
+      color: rgba(162, 162, 162, 1);
+      padding: 0rem 0.1rem;
     }
   }
 }

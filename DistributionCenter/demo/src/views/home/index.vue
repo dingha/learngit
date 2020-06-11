@@ -47,8 +47,10 @@ export default {
 <style lang="scss" scoped>
 .d-home {
   height: 100%;
+  width: 100%;
 }
 .d-home-content {
+  width: calc(100% - 0.4rem);
   height: calc(100% - 1rem);
   overflow-y: auto;
   padding: 0.1rem 0.2rem;

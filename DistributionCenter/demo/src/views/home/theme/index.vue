@@ -7,25 +7,25 @@
       <span class="d-home-recommend-theme-title-all">全部></span>
     </p>
     <van-swipe :loop="false" :width="150" :show-indicators="false">
-      <van-swipe-item v-for="(image, index) in images" :key="index">
-        <img v-lazy="image" />
-        <label>小户型简约北欧风格</label>
+      <van-swipe-item @click="gotoparameter" v-for="(data, index) in datalist" :key="index">
+        <img v-lazy="data.image" />
+        <label>{{ data.name }}</label>
         <div class="d-home-recommend-theme-content-under">
           <div>
             <span>
-              <img src="./../../../assets/png/home/评论@3x.png" alt />
+              <img :src="data.icon1" alt />
             </span>
             <span>5</span>
           </div>
           <div>
             <span>
-              <img src="./../../../assets/png/home/收藏@3x.png" alt />
+              <img :src="data.icon2" alt />
             </span>
             <span>3</span>
           </div>
           <div>
             <span>
-              <img src="./../../../assets/png/home/点赞@3x.png" alt />
+              <img :src="data.icon3" alt />
             </span>
             <span>3</span>
           </div>
@@ -38,8 +38,39 @@
 <script>
 export default {
   name: "",
+  methods: {
+    gotoparameter() {
+      this.$router.push({ path: "/home/parameter" });
+    }
+  },
   data() {
     return {
+      datalist: [
+        {
+          image: require("../../../assets/png/home/主题1@3x.png"),
+          icon1: require("./../../../assets/png/home/评论@3x.png"),
+          icon2: require("./../../../assets/png/home/收藏@3x.png"),
+          icon3: require("./../../../assets/png/home/点赞@3x.png"),
+          name: "小户型简约北欧风格",
+          path: "/home"
+        },
+        {
+          image: require("../../../assets/png/home/主题2-@3x.png"),
+          icon1: require("./../../../assets/png/home/评论@3x.png"),
+          icon2: require("./../../../assets/png/home/收藏@3x.png"),
+          icon3: require("./../../../assets/png/home/点赞@3x.png"),
+          name: "小户型简约北欧风格",
+          path: "/home"
+        },
+        {
+          image: require("../../../assets/png/home/主题1@3x.png"),
+          icon1: require("./../../../assets/png/home/评论@3x.png"),
+          icon2: require("./../../../assets/png/home/收藏@3x.png"),
+          icon3: require("./../../../assets/png/home/点赞@3x.png"),
+          name: "小户型简约北欧风格",
+          path: "/home"
+        }
+      ],
       images: [
         require("../../../assets/png/home/主题1@3x.png"),
         require("../../../assets/png/home/主题2-@3x.png"),
@@ -69,7 +100,7 @@ export default {
     }
     .d-home-recommend-theme-title-all {
       margin-left: auto;
-      color: rgba(0, 0, 0, 0.7);
+      color: rgba(162, 162, 162, 1);
     }
   }
   .van-swipe-item {

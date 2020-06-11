@@ -4,10 +4,11 @@
     <van-tabbar v-model="active" active-color="red" inactive-color="#000">
       <van-tabbar-item
         :name="data.path"
-        :to="{path: data.path, query:{active}}"
+        :to="{path: data.path, query:$route.query.active}"
         v-for="(data, index) in datalist"
         :key="index"
       >
+        {{$route.query.id}}
         <span>{{data.name}}</span>
         <template #icon="props">
           <img :src="props.active ? data.redimage : data.image" />
@@ -20,10 +21,24 @@
 <script>
 export default {
   name: "",
+  methods: {
+    transmit() {
+      if (this.$route.query.id) {
+        this.active = this.$route.query.id;
+        this.$route.query.id = null;
+      }
+    }
+  },
+  beforeMount() {
+    this.transmit();
+  },
+  updated() {
+    this.transmit();
+  },
   data() {
     return {
       props: ["id", "age"],
-      active: "/car",
+      active: "/home",
       datalist: [
         {
           redimage: require("../../assets/icon/homered@3x.png"),

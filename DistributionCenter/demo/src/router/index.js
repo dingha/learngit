@@ -48,10 +48,8 @@ const bottomChildren = [{
     redirect: e => {
       const {
         query
-      } = e; 
-      console.log(query.id);
+      } = e;
       if (query.id === '/car') {
-        console.log(e);
         return '/car/Thereare'
       } else {
         return '/car/empty'

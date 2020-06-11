@@ -31,10 +31,7 @@ export default {
   components: navTabbox,
   methods: {
     gotolink() {
-      this.$route.query.active = "/home";
-      console.log(this.$route.query.active);
-      //this.$refs.apptable.selectMember(this.params)
-      // this.$router.push({ path: "/home/positioning" });
+      this.$router.push({ path: "/home/positioning" });
     },
     gotogoods() {
       this.$router.push({ path: "/home/searchgoods" });

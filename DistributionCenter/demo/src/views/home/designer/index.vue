@@ -7,9 +7,9 @@
       <span class="d-home-recommend-designer-title-all">全部></span>
     </p>
     <van-grid :column-num="4">
-      <van-grid-item v-for="(image, index) in imagedesigner" :key="index">
-        <img width="100%" v-lazy="image" />
-        {{ names[index] }}
+      <van-grid-item v-for="(data, index) in datalist" :key="index">
+        <img width="100%" v-lazy="data.image" />
+        {{ data.name }}
       </van-grid-item>
     </van-grid>
     <!-- <van-grid-item v-for="(image, index) in imagestop" :key="index"></van-grid-item> -->
@@ -21,25 +21,47 @@ export default {
   name: "",
   data() {
     return {
-      imagedesigner: [
-        require("../../../assets/png/home/设计师1@3x.png"),
-        require("../../../assets/png/home/设计师2@3x.png"),
-        require("../../../assets/png/home/设计师3@3x.png"),
-        require("../../../assets/png/home/设计师4@3x.png"),
-        require("../../../assets/png/home/设计师1@3x.png"),
-        require("../../../assets/png/home/设计师2@3x.png"),
-        require("../../../assets/png/home/设计师3@3x.png"),
-        require("../../../assets/png/home/设计师4@3x.png")
-      ],
-      names: [
-        "张伟",
-        "许青云",
-        "陈迪",
-        "何丽",
-        "张伟",
-        "许青云",
-        "陈迪",
-        "何丽"
+      datalist: [
+        {
+          image: require("../../../assets/png/home/设计师1@3x.png"),
+          name: "张伟",
+          path: ""
+        },
+        {
+          image: require("../../../assets/png/home/设计师2@3x.png"),
+          name: "许青云",
+          path: ""
+        },
+        {
+          image: require("../../../assets/png/home/设计师3@3x.png"),
+          name: "陈迪",
+          path: ""
+        },
+        {
+          image: require("../../../assets/png/home/设计师4@3x.png"),
+          name: "何丽",
+          path: ""
+        },
+        {
+          image: require("../../../assets/png/home/设计师1@3x.png"),
+          name: "张伟",
+          path: ""
+        },
+        {
+          image: require("../../../assets/png/home/设计师2@3x.png"),
+          name: "许青云",
+          path: ""
+        },
+        {
+          image: require("../../../assets/png/home/设计师3@3x.png"),
+          name: "陈迪",
+          path: ""
+        },
+        {
+          image: require("../../../assets/png/home/设计师4@3x.png"),
+          name: "何丽",
+          path: ""
+        }
       ]
     };
   }
@@ -64,7 +86,7 @@ export default {
     }
     .d-home-recommend-designer-title-all {
       margin-left: auto;
-      color: rgba(0, 0, 0, 0.7);
+      color: rgba(162, 162, 162, 1);
     }
   }
 }

@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div class="d-home-evaluation">
-    <van-nav-bar title="用户评价" color="#1989fa" left-arrow />
+    <van-nav-bar title="用户评价" color="#1989fa" left-arrow @click-left="onClickLeft" />
     <van-cell-group v-for="(datal, index)  in datalist" :key="index">
       <van-cell>
         <!-- 使用 title 插槽来自定义标题 -->
@@ -30,6 +30,11 @@
 <script>
 export default {
   name: "",
+  methods: {
+    onClickLeft() {
+      this.$router.go(-1);
+    }
+  },
   data() {
     return {
       datalist: [

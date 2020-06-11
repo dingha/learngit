@@ -45,7 +45,16 @@ const bottomChildren = [{
   {
     path: "/car",
     name: "car",
-    redirect: "/car/empty",
+    redirect: e => {
+      const {
+        query
+      } = e; 
+      if (query.id === '/car') {
+        return '/car/Thereare'
+      } else {
+        return '/car/empty'
+      }
+    },
     component: () =>
       import( /* webpackChunkName: "car" */ "../views/car/index.vue"),
     children: [{
