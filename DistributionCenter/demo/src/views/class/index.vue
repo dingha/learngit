@@ -7,7 +7,7 @@
           <van-icon name="search" />
         </template>
         <template #action>
-          <van-icon size=".4rem" name="shopping-cart-o" />
+          <van-icon @click="gotocar" size=".4rem" name="shopping-cart-o" />
         </template>
       </van-search>
     </form>
@@ -36,6 +36,12 @@ export default {
     };
   },
   methods: {
+    gotocar() {
+      this.$router.push({
+        path: "/car",
+        query: { id: "/car", name:"/car/Thereare"}
+      });
+    },
     onChange(index) {
       Notify({ type: "primary", message: index });
     }

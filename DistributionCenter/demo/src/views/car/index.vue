@@ -2,7 +2,7 @@
 <template>
   <div class="car">
     <div class="car-top">
-      <van-nav-bar title="购物车" right-text="编辑" />
+      <van-nav-bar title="购物车" :right-text="rightText" @click-right="onClickRight" />
     </div>
     <div class="car-container">
       <router-view></router-view>
@@ -14,6 +14,17 @@
 export default {
   name: "",
   methods: {
+    onClickRight() {
+      console.log(this.rightText);
+      let names = "";
+      this.rightText === "编辑"
+        ? ((this.rightText = "完成"), (names = "/car/editor"))
+        : ((this.rightText = "编辑"), (names = "/car/empty"));
+      this.$router.push({
+        path: "/car",
+        query: { id: "/car", name: names }
+      });
+    },
     checkAll() {
       this.$emit("my-click", "我很好");
       // this.$refs.checkboxGroup.toggleAll(true);
@@ -21,6 +32,7 @@ export default {
   },
   data() {
     return {
+      rightText: "编辑",
       result: []
     };
   }

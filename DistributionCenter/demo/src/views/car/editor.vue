@@ -27,9 +27,18 @@
       </div>
     </van-checkbox-group>
     <div class="car-footer">
-      <van-submit-bar :price="3050" type="warning" button-text="去结算">
+      <van-cell title="单元格" value="内容">
+        <template #title>
+          <van-checkbox v-model="checked" @click="checkAll">全选</van-checkbox>
+        </template>
+        <template #default>
+          <van-button type="default">收藏</van-button>
+          <van-button type="danger">删除</van-button>
+        </template>
+      </van-cell>
+      <!-- <van-submit-bar :price="3050" type="warning" button-text="删除">
         <van-checkbox v-model="checked" @click="checkAll">全选</van-checkbox>
-      </van-submit-bar>
+      </van-submit-bar>-->
     </div>
   </div>
 </template>
@@ -184,6 +193,15 @@ export default {
     bottom: 0;
     width: 100%;
     height: 8%;
+    .van-cell {
+      align-items: center;
+      .van-cell__value {
+        flex: 4;
+        button {
+          width: 29%;
+        }
+      }
+    }
     .van-submit-bar {
       position: absolute;
       .van-button {

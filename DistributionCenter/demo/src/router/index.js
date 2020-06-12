@@ -49,10 +49,21 @@ const bottomChildren = [{
       const {
         query
       } = e;
-      if (query.id === '/car') {
-        return '/car/Thereare'
-      } else {
-        return '/car/empty'
+      switch (query.name) {
+        case "/car/Thereare":
+          return "/car/Thereare";
+        case "/car/confirm":
+          return "/car/confirm";
+        case "/car/editor":
+          return "/car/editor";
+        case "/car/empty":
+          return "/car/empty";
+        case "/car/messageboard":
+          return "/car/messageboard";
+        case "/car/payment":
+          return "/car/payment";
+        default:
+          return "/car/empty";
       }
     },
     component: () =>

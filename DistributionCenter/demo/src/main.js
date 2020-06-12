@@ -3,9 +3,39 @@ import App from "./App.vue";
 import router from "./router";
 import "./common/js/index";
 import "./common/css/index.css";
+import "./api/vender/request";
+import "./api/home";
 // eslint-disable-next-line no-unused-vars
-import axios from 'axios';
+import axios from "axios";
 // eslint-disable-next-line no-unused-vars
+// console.dir(axios);
+// axios.get("require('../../home')").then(res => {
+//   console.log(res);
+// })
+// axios.get('./static/head.json')
+//   .then(function (response) {
+//     // handle success
+//     console.log(response);
+//   })
+
+// axios.get('http://localhost:8080/head.json')
+// .then(function (response) {
+// // handle success
+// console.log(response);
+// })
+// axios.get("./assets/json/head.json").then(res => {
+//   console.log(res);
+// })require("../../../assets/png/home/全屋小商品1@3x.png")
+
+// axios.get("require('../../home')").then(res => {
+//   console.log(res);
+// })
+// console.log(
+//   axios.get("./assets/json/head.json").then(res => {
+//     console.log(res);
+//   })
+
+// );
 import {
   Button,
   Tabbar,
@@ -26,22 +56,29 @@ import {
   NavBar,
   Tag,
   CellGroup,
-  List,Loading,
+  List,
+  Loading,
   Tab,
   Tabs,
-  GoodsAction, GoodsActionIcon, GoodsActionButton,
+  GoodsAction,
+  GoodsActionIcon,
+  GoodsActionButton,
   Sku,
   Field,
-  Divider ,
+  Divider,
   Form,
-  Sidebar, SidebarItem,
-  Collapse, CollapseItem,
+  Sidebar,
+  SidebarItem,
+  Collapse,
+  CollapseItem,
   SubmitBar,
-  Checkbox,CheckboxGroup,
+  Checkbox,
+  CheckboxGroup,
   Card,
   Stepper,
   CountDown,
-  RadioGroup, Radio
+  RadioGroup,
+  Radio
 } from "vant";
 
 import a from "utils";
@@ -74,7 +111,7 @@ Vue.use(GoodsAction);
 Vue.use(GoodsActionButton);
 Vue.use(GoodsActionIcon);
 Vue.use(Sku);
-Vue.use(Field); 
+Vue.use(Field);
 Vue.use(Divider);
 Vue.use(Form);
 Vue.use(Sidebar);

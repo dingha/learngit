@@ -25,12 +25,14 @@
 </template>
 
 <script>
+// import request from "../../../api/vender/request"
 import { navTabbox } from "../../../components/navTab/index";
 export default {
   name: "",
   components: navTabbox,
   methods: {
     gotolink() {
+     
       this.$router.push({ path: "/home/positioning" });
     },
     gotogoods() {
@@ -39,7 +41,7 @@ export default {
     gotocar() {
       this.$router.push({
         path: "/car",
-        query: { id: "/car" }
+        query: { id: "/car", name:"/car/Thereare"}
       });
     }
   }
