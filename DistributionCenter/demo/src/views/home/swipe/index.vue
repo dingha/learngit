@@ -14,7 +14,13 @@ export default {
   name: "",
   methods: {
     gotoparameter() {
+      this.$emit("parameterID", "11"); //发布change事件并且携带参数
       this.$router.push({ path: "/home/parameter" });
+
+      this.$router.push({
+        path: "/home/parameter",
+        query: { id: "3" }
+      });
     }
   },
   data() {

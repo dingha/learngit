@@ -4,11 +4,11 @@ import router from "./router";
 import "./common/js/index";
 import "./common/css/index.css";
 import "./api/vender/request";
-import "./api/index";
+import "./api/home";
 // eslint-disable-next-line no-unused-vars
 import axios from "axios";
 // eslint-disable-next-line no-unused-vars
-
+console.dir(axios);
 // axios.get("require('../../home')").then(res => {
 //   console.log(res);
 // })

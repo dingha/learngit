@@ -1,15 +1,37 @@
 import request from "./vender/request";
+import { API_HOME_DATA, API_HOME_GOODS_PARAMETER_DATA } from "./URLS.js";
 
-request("./api/wangh_fxsc/category/lookCategory.Action")
- 
-    //172.18.0.1:8880/FXSC/category/selCategory.Action
+// 获取首页数据
+export const postHomeData = () => {
+  request(API_HOME_DATA)
     .then(data => {
-        console.log(data)
-    }).catch(err =>{
-        console.log(err)
+      return data;
+      // console.log(data, "home");
     })
+    .catch(err => {
+      console.log(err);
+    });
+};
 
-// export const getHomeNavData={}=>{
-    // http://localhost:8080/192.168.0.26:8080/wangh_fxsc/category/selCategory.Action 404 (Not Found)
-//     return request("http://localhost:8080/head.json")
-// }http://172.18.0.1:8080/172.18.0.1:8880/FXSC/category/selCategory.Action
+// 获取首页商-品参数数据
+export const postHomeParameterData = () => {
+  return request(API_HOME_GOODS_PARAMETER_DATA, {
+    data: {
+      category: {
+        pid: "1"
+      }
+    }
+  })
+    .then(data => {
+      // console.log(data, "parameter");
+      return data;
+    })
+    .catch(err => {
+      console.log(err, 2);
+      return err;
+    });
+};
+// console.log(postHomeParameterData())
+postHomeData();
+// postHomeParameterData()
+// console.log("postHomeParameterData", postHomeParameterData());

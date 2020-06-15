@@ -9,7 +9,7 @@
         </svg>
       </div>
       <img v-lazy="data.magetop" />
-      <p>{{postdata}}</p>
+      <p>{{data.name}}</p>
       <div>
         <span class="d-home-parameter-top-price">{{data.price}}</span>
         <span>已售 36</span>
@@ -79,7 +79,7 @@
           </van-list>
         </van-tab>
         <van-tab class="van-tab__pane2" title="商品参数">
-          <van-cell title="商品风格" value="现代"></van-cell>
+          <van-cell title="商品风格" value="现代" />
           <van-cell title="主要材料" value="白橡木" />
           <van-cell title="产地" value="江苏苏州" />
           <van-cell title="油漆工艺" value="环保漆" />
@@ -103,26 +103,16 @@
 </template>
 
 <script>
-import { postHomeParameterData } from "../../../api/home";
 import { Toast } from "vant";
-// postHomeParameterData()
 export default {
   name: "",
-
   methods: {
     gotoevaluation() {
       this.$router.push({ path: "/home/evaluation" });
     },
     backHistory() {
-      // const post = postHomeParameterData();
-      // post.then(data => {
-
-      //   console.log(data[0].name);
-      //   this.aaa = data[0].name;
-      // });
-      // 点击跳转至上次浏览页面
-      this.$router.go(-1); //
-      // console.log(yyt)
+      //点击跳转至上次浏览页面
+      this.$router.go(-1);
     },
     buy() {
       this.show = this.show == true || this.show == false;
@@ -135,24 +125,9 @@ export default {
       Toast("点击按钮");
     }
   },
-  created() {
-    console.log(this.$route.query.id);
-    const post = postHomeParameterData();
-    post.then(data => {
-      console.log(data);
-      data.forEach(item => {
-        // console.log(item);
-        if (item.id === parseInt(this.$route.query.id)) {
-          this.postdata = item;
-          console.log(this.postdata);
-        }
-      });
-    });
-  },
   data() {
     return {
       show: false,
-      postdata: "121",
       sku: {
         // 所有sku规格类目与其值的从属关系，比如商品有颜色和尺码两大类规格，颜色下面又有红色和蓝色两个规格值。
         // 可以理解为一个商品可以有多个规格类目，一个规格类目下可以有多个规格值。

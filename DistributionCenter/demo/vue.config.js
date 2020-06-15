@@ -5,18 +5,15 @@ module.exports = {
   },
   // 配置服务器地址
   devServer: {
+    compress: true,
     proxy: {
-      compress: true,
       "/api/": {
         target: "http://192.168.0.26:8080",
-        // secure: false,
         changeOrigin: true,
-        
+
         pathRewrite: {
           "^/api/": ""
         }
-        // changeOrigin: true,
-        // logLevel: "debug"
       }
     }
   }

@@ -4,40 +4,29 @@ const baseOptions = {
   method: "POST",
   timeout: 10000,
   headers: {
-    "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-    "Access-Control-Allow-Origin": "*"
+    "Content-Type": "application/json"
   }
-}
+};
 
-// axios
-//   // .post("http://192.168.0.26:8080/wangh_fxsc/category/lookCategory.Action")
-//   .post("https://www.baidu.com/img/flexible/logo/pc/result.png")
-//   .then(res =>{
-//     console.log(res);
-//   })
-//   .catch(err => console.log(err))
-
-
-// axios.defaults.header.post['Content-Type'] = 'application/json';
-export default (url, ) => {
+export default (url, options) => {
   return axios({
-      url,
-      ...baseOptions
-      // ...options
-    }).then(res => {
-      console.log(res);
-      // const { code, data } = res;
-      // if (status == 200 && code == 0) {
-      //   return data;
-      // }
+    url,
+    ...options,
+    ...baseOptions
+  })
+    .then(res => {
+      const {
+        status,
+        data: { code,data }
+      } = res;
+      if (status == 200 && code == 0) {
+        return data;
+      }
     })
     .catch(err => {
-      const {
-        message
-      } = err;
-      console.log(message.toLowerCase())
-      // return err;
-    })
+      const { message } = err;
+      console.log(message.toLowerCase());
+    });
 };
 
 // function handleError(message) {
