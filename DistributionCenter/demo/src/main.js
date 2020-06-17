@@ -7,35 +7,6 @@ import "./api/vender/request";
 import "./api/index";
 // eslint-disable-next-line no-unused-vars
 import axios from "axios";
-// eslint-disable-next-line no-unused-vars
-
-// axios.get("require('../../home')").then(res => {
-//   console.log(res);
-// })
-// axios.get('./static/head.json')
-//   .then(function (response) {
-//     // handle success
-//     console.log(response);
-//   })
-
-// axios.get('http://localhost:8080/head.json')
-// .then(function (response) {
-// // handle success
-// console.log(response);
-// })
-// axios.get("./assets/json/head.json").then(res => {
-//   console.log(res);
-// })require("../../../assets/png/home/全屋小商品1@3x.png")
-
-// axios.get("require('../../home')").then(res => {
-//   console.log(res);
-// })
-// console.log(
-//   axios.get("./assets/json/head.json").then(res => {
-//     console.log(res);
-//   })
-
-// );
 import {
   Button,
   Tabbar,
@@ -78,7 +49,8 @@ import {
   Stepper,
   CountDown,
   RadioGroup,
-  Radio
+  Radio,
+  Toast 
 } from "vant";
 
 import a from "utils";
@@ -126,6 +98,7 @@ Vue.use(Stepper);
 Vue.use(CountDown);
 Vue.use(Radio);
 Vue.use(RadioGroup);
+Vue.use(Toast);
 Vue.config.productionTip = false;
 
 new Vue({

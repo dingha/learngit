@@ -10,7 +10,7 @@
           <div>{{data.English}}</div>
         </template>
         <template #right-icon>
-          <img v-lazy="data.image" />
+          <img v-lazy="data.img" />
         </template>
       </van-cell>
     </van-cell-group>
@@ -18,68 +18,80 @@
 </template>
 
 <script>
+import { postClassData } from "../../api/class";
 export default {
   name: "",
+  computed: {},
+  created() {
+    // 获取数据并合并到本地中
+    const post = postClassData("1");
+    post.then(data => {
+      data.data.forEach((item, i) => {
+        this.datalist[i] = Object.assign(this.datalist[i], item);
+      });
+    });
+  },
   data() {
     return {
+      postdata: "",
       datalist: [
         {
-          image: require("../../assets/png/home/goods/2@3x.png"),
+          img: require("../../assets/png/home/goods/2@3x.png"),
           name: "沙发",
           English: "The sofa"
         },
         {
-          image: require("../../assets/png/home/goods/3@3x.png"),
+          img: require("../../assets/png/home/goods/3@3x.png"),
           name: "席梦思",
           English: "The sofa"
         },
         {
-          image: require("../../assets/png/home/goods/2@3x.png"),
+          img: require("../../assets/png/home/goods/2@3x.png"),
           name: "沙发",
           English: "The sofa"
         },
         {
-          image: require("../../assets/png/home/goods/2@3x.png"),
+          img: require("../../assets/png/home/goods/2@3x.png"),
           name: "沙发",
           English: "The sofa"
         },
         {
-          image: require("../../assets/png/home/goods/2@3x.png"),
+          img: require("../../assets/png/home/goods/2@3x.png"),
           name: "沙发",
           English: "The sofa"
         },
         {
-          image: require("../../assets/png/home/goods/2@3x.png"),
+          img: require("../../assets/png/home/goods/2@3x.png"),
           name: "沙发",
           English: "The sofa"
         },
         {
-          image: require("../../assets/png/home/goods/2@3x.png"),
+          img: require("../../assets/png/home/goods/2@3x.png"),
           name: "沙发",
           English: "The sofa"
         },
         {
-          image: require("../../assets/png/home/goods/2@3x.png"),
+          img: require("../../assets/png/home/goods/2@3x.png"),
           name: "沙发",
           English: "The sofa"
         },
         {
-          image: require("../../assets/png/home/goods/2@3x.png"),
+          img: require("../../assets/png/home/goods/2@3x.png"),
           name: "沙发",
           English: "The sofa"
         },
         {
-          image: require("../../assets/png/home/goods/2@3x.png"),
+          img: require("../../assets/png/home/goods/2@3x.png"),
           name: "沙发",
           English: "The sofa"
         },
         {
-          image: require("../../assets/png/home/goods/2@3x.png"),
+          img: require("../../assets/png/home/goods/2@3x.png"),
           name: "沙发",
           English: "The sofa"
         },
         {
-          image: require("../../assets/png/home/goods/2@3x.png"),
+          img: require("../../assets/png/home/goods/2@3x.png"),
           name: "沙发",
           English: "The sofa"
         }

@@ -4,7 +4,8 @@ const baseOptions = {
   method: "POST",
   timeout: 10000,
   headers: {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMzU4ODEzNzU0MCJ9.NTM7eyQ2apaezBvGUhFgh-inIUBZybkLKaw3HL8GBeY"
   }
 };
 
@@ -17,10 +18,11 @@ export default (url, options) => {
     .then(res => {
       const {
         status,
-        data: { code,data }
+        data: { code },
+        // data
       } = res;
       if (status == 200 && code == 0) {
-        return data;
+        return res;
       }
     })
     .catch(err => {

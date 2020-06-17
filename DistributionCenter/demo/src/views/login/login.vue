@@ -13,7 +13,15 @@
     <van-tabs v-model="active">
       <van-tab class="login-login" title="登录">
         <van-cell-group>
-          <van-field v-model="value" left-icon="smile-o" placeholder="请输入手机号">
+          <van-field
+            v-model="logtel"
+            @input="input('logtel')"
+            :error="logtelerr"
+            required
+            left-icon="smile-o"
+            type="tel"
+            placeholder="请输入手机号"
+          >
             <template #left-icon>
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-denglu-shoujihao" />
@@ -22,7 +30,15 @@
           </van-field>
         </van-cell-group>
         <van-cell-group>
-          <van-field v-model="value" left-icon="smile-o" placeholder="请输入密码">
+          <van-field
+            v-model="logpwd"
+            @input="input('logpwd')"
+            :error="logpwderr"
+            required
+            left-icon="smile-o"
+            type="password"
+            placeholder="请输入密码"
+          >
             <template #left-icon>
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-mima" />
@@ -31,7 +47,7 @@
           </van-field>
         </van-cell-group>
         <div class="login-loginbut">
-          <van-button type="danger" to="/login/welcome">登录</van-button>
+          <van-button type="danger" @click="login">登录</van-button>
         </div>
         <div class="login-forget" @click="gotoSetforgotten">
           <p>忘记密码</p>
@@ -69,7 +85,14 @@
 
       <van-tab title="注册">
         <van-cell-group>
-          <van-field v-model="value" placeholder="请输入手机号">
+          <van-field
+            v-model="regtel"
+            @input="input('tel')"
+            :error="regtelerr"
+            required
+            type="tel"
+            placeholder="请输入手机号"
+          >
             <template #left-icon>
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-denglu-shoujihao" />
@@ -78,19 +101,32 @@
           </van-field>
         </van-cell-group>
         <van-cell-group>
-          <van-field v-model="value" placeholder="请输入验证码">
+          <van-field
+            v-model="regsms"
+            @input="input('sms')"
+            required
+            :error="regsmserr"
+            placeholder="请输入验证码"
+          >
             <template #left-icon>
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-yanzhengma-01" />
               </svg>
             </template>
             <template #extra>
-              <label style="color:red">发送验证码</label>
+              <label style="color:red" @click="sendSMS">发送验证码</label>
             </template>
           </van-field>
         </van-cell-group>
         <van-cell-group>
-          <van-field v-model="value" placeholder="请输入密码">
+          <van-field
+            v-model="regpwd"
+            @input="input('pwd')"
+            :error="regpwderr"
+            required
+            type="password"
+            placeholder="请输入密码"
+          >
             <template #left-icon>
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-renyuan1" />
@@ -99,7 +135,7 @@
           </van-field>
         </van-cell-group>
         <van-cell-group>
-          <van-field v-model="value" placeholder="请输入推荐码">
+          <van-field v-model="regrecommend" placeholder="请输入推荐码">
             <template #left-icon>
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-mima" />
@@ -108,7 +144,7 @@
           </van-field>
         </van-cell-group>
         <div class="login-loginbut">
-          <van-button type="danger" to="/login/welcome">注册</van-button>
+          <van-button type="danger" @click="register" to>注册</van-button>
         </div>
         <div class="login-agreement">
           <p>点击注册表示您已经同意用户协议</p>
@@ -119,15 +155,92 @@
 </template>
 
 <script>
+import { Toast } from "vant";
+import {
+  postLoginRegisteredSmsData,
+  postLoginRegisteredData,
+  postLoginData
+} from "../../api/login";
 export default {
   name: "",
   data() {
     return {
       active: 2,
-      value: ""
+      regtel: "",
+      regsms: "",
+      regpwd: "",
+      regrecommend: "",
+      regtelerr: false,
+      regsmserr: false,
+      regpwderr: false,
+
+      logtel: "",
+      logpwd: "",
+      logtelerr: false,
+      logpwderr: false
     };
   },
   methods: {
+    input(item) {
+      switch (item) {
+        case "logtel":
+          return (this.logtelerr = false);
+        case "logpwd":
+          return (this.logpwderr = false);
+        case "tel":
+          return (this.regtelerr = false);
+        case "sms":
+          return (this.regsmserr = false);
+        case "pwd":
+          return (this.regpwderr = false);
+        default:
+          return;
+      }
+    }, //to="/login/welcome"
+    login() {
+      if (this.logtel == "") {
+        this.logtelerr = true;
+      } else if (this.logpwd == "") {
+        this.logpwderr = true;
+      } else {
+        const loginpost = postLoginData(
+          this.logtel,
+          this.logpwd
+        );
+        loginpost.then(data => {
+          console.log(data);
+          Toast(data.data.msg);
+        });
+        // this.$router.push({ path: "/login/welcome" });
+      }
+    },
+    register() {
+      if (this.regtel == "") {
+        this.regtelerr = true;
+      } else if (this.regsms == "") {
+        this.regsmserr = true;
+      } else if (this.regpwd == "") {
+        this.regpwderr = true;
+      } else {
+        const registerpost = postLoginRegisteredData(
+          this.regtel,
+          this.regsms,
+          this.regpwd
+        );
+        registerpost.then(data => {
+          console.log(data);
+          Toast(data.data.msg);
+        });
+      }
+    },
+    sendSMS() {
+      const sendSMSpost = postLoginRegisteredSmsData(this.regtel);
+
+      sendSMSpost.then(data => {
+        console.log(data);
+        Toast(data.data.msg);
+      });
+    },
     onClickLeft() {
       this.$router.go(-1);
     },

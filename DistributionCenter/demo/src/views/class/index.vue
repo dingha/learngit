@@ -13,10 +13,13 @@
     </form>
     <div class="class-content">
       <div class="class-content-left">
-        <van-sidebar v-model="activeKey" @change="onChange">
-          <van-sidebar-item title="品类" to="/class/category" />
-          <van-sidebar-item title="空间" to="/class/space" />
-          <van-sidebar-item title="风格" to="/class/style" />
+        <van-sidebar v-model="activeKey">
+          <van-sidebar-item
+            :title="data.name"
+            :to="{ path: data.push,query: {id:data.querys}}"
+            v-for="(data, index) in datalist"
+            :key="index"
+          />
         </van-sidebar>
       </div>
       <div class="class-content-right">
@@ -27,11 +30,49 @@
 </template>
 
 <script>
-import { Notify } from "vant";
+import { postClassData } from "../../api/class";
 export default {
   name: "",
+  created() {
+    // 获取数据并合并到本地中
+    
+    const post = postClassData("0");
+    post.then(data => {
+      data.data.forEach((item, i) => {
+        this.datalist[i] = Object.assign(this.datalist[i], item);
+        this.datalist[i].querys = item.id;
+      });
+    });
+  },
   data() {
     return {
+      datalist: [
+        {
+          push: "/class/category",
+          name: "品类",
+          querys: ""
+        },
+        {
+          push: "/class/space",
+          name: "空间",
+          querys: ""
+        },
+        {
+          push: "/class/style",
+          name: "风格",
+          querys: ""
+        },
+        {
+          push: "/class/style",
+          name: "风格",
+          querys: ""
+        },
+        {
+          push: "/class/style",
+          name: "风格",
+          querys: ""
+        }
+      ],
       activeKey: 0
     };
   },
@@ -39,11 +80,8 @@ export default {
     gotocar() {
       this.$router.push({
         path: "/car",
-        query: { id: "/car", name:"/car/Thereare"}
+        query: { id: "/car", name: "/car/Thereare" }
       });
-    },
-    onChange(index) {
-      Notify({ type: "primary", message: index });
     }
   }
 };

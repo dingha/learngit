@@ -1,25 +1,19 @@
 <!--  -->
 <template>
   <div class="class-space">
-    <van-collapse v-model="activeNames">
+    <van-collapse v-model="activeNames" accordion>
       <van-collapse-item :name="index" v-for="(data, index) in datalist" :key="index">
         <template #right-icon>
-          <img v-lazy="data.image" />
-          <p>124</p>
-          <p>124</p>
+          <img v-lazy="data.img" />
+          <p>{{data.name}}</p>
+          <p>{{data.English}}</p>
         </template>
         <template #default>
           <van-cell-group>
-            <van-cell :van-tag="12213" is-link>
+            <van-cell :van-tag="12213" v-for="(datas, index) in data.content" :key="index">
               <template #title>
-                <span class="custom-title">单元格</span>
-                <span class="custom-title">单元格</span>
-              </template>
-            </van-cell>
-            <van-cell :van-tag="12213" is-link>
-              <template #title>
-                <span class="custom-title">单元格</span>
-                <span class="custom-title">单元格</span>
+                <span class="custom-title">{{datas.name}}</span>
+                <span class="custom-title">{{datas.ename}}</span>
               </template>
             </van-cell>
           </van-cell-group>
@@ -30,61 +24,91 @@
 </template>
 
 <script>
+import { postClassData, postClassData2 } from "../../api/class";
 export default {
   name: "",
+  created() {
+    // 获取数据并合并到本地中
+    const post1 = postClassData("1");
+    const post2 = postClassData2("2");
+    post1.then(data => {
+      data.data.forEach((item, i) => {
+        this.datalist[i] = Object.assign(this.datalist[i], item);
+
+        console.log(this.datalist);
+      });
+    });
+    post2.then(data => {
+      data.data.forEach((item, i) => {
+        this.datalist[i].content = data.data;
+
+        console.log(this.datalist);
+      });
+    });
+  },
   data() {
     return {
       activeNames: [""],
       datalist: [
         {
-          image: require("../../assets/png/class/piceur@3x.png"),
+          img: require("../../assets/png/class/piceur@3x.png"),
           name: "沙发",
-          English: "The sofa"
+          English: "The sofa",
+          content: [{ name: "沙发", ename: "saear" }]
         },
         {
-          image: require("../../assets/png/class/picli@3x.png"),
+          img: require("../../assets/png/class/picli@3x.png"),
           name: "席梦思",
-          English: "The sofa"
+          English: "The sofa",
+          content: [{ name: "沙发", ename: "saear" }]
         },
         {
-          image: require("../../assets/png/class/piceur@3x.png"),
+          img: require("../../assets/png/class/piceur@3x.png"),
           name: "沙发",
-          English: "The sofa"
+          English: "The sofa",
+          content: [{ name: "沙发", ename: "saear" }]
         },
         {
-          image: require("../../assets/png/class/picli@3x.png"),
+          img: require("../../assets/png/class/picli@3x.png"),
           name: "席梦思",
-          English: "The sofa"
+          English: "The sofa",
+          content: [{ name: "沙发", ename: "saear" }]
         },
         {
-          image: require("../../assets/png/class/piceur@3x.png"),
+          img: require("../../assets/png/class/piceur@3x.png"),
           name: "沙发",
-          English: "The sofa"
+          English: "The sofa",
+          content: [{ name: "沙发", ename: "saear" }]
         },
         {
-          image: require("../../assets/png/class/picli@3x.png"),
+          img: require("../../assets/png/class/picli@3x.png"),
           name: "席梦思",
-          English: "The sofa"
+          English: "The sofa",
+          content: [{ name: "沙发", ename: "saear" }]
         },
         {
-          image: require("../../assets/png/class/piceur@3x.png"),
+          img: require("../../assets/png/class/piceur@3x.png"),
           name: "沙发",
-          English: "The sofa"
+          English: "The sofa",
+          content: [{ name: "沙发", ename: "saear" }]
         },
         {
-          image: require("../../assets/png/class/picli@3x.png"),
+          img: require("../../assets/png/class/picli@3x.png"),
           name: "席梦思",
-          English: "The sofa"
+          English: "The sofa",
+          content: [{ name: "沙发", ename: "saear" }]
         },
         {
-          image: require("../../assets/png/class/piceur@3x.png"),
+          img: require("../../assets/png/class/piceur@3x.png"),
           name: "沙发",
-          English: "The sofa"
+          English: "The sofa",
+          content: [{ name: "沙发", ename: "saear" }]
         },
         {
-          image: require("../../assets/png/class/picli@3x.png"),
+          img: require("../../assets/png/class/picli@3x.png"),
           name: "席梦思",
-          English: "The sofa"
+          English: "The sofa",
+          content: [{ name: "沙发", ename: "saear" }]
         }
       ]
     };
@@ -103,9 +127,10 @@ export default {
       /deep/ {
         .van-cell {
           padding: 0rem 0rem;
+          width: 100%;
           img {
             width: 100%;
-            height: 100%;
+            height: 1.8rem;
           }
           p {
             position: absolute;

@@ -8,11 +8,11 @@
           <use xlink:href="#icon-fenxiang2" />
         </svg>
       </div>
-      <img v-lazy="data.magetop" />
-      <p>{{postdata}}</p>
+      <img v-lazy="data.img" />
+      <p>{{data.name}}</p>
       <div>
-        <span class="d-home-parameter-top-price">{{data.price}}</span>
-        <span>已售 36</span>
+        <span class="d-home-parameter-top-price">￥{{data.price}}</span>
+        <span>已售 {{data.sale}}</span>
       </div>
       <van-row>
         <van-col span="9" gutter="20">
@@ -30,7 +30,7 @@
     <div class="d-home-parameter-content">
       <van-cell-group>
         <van-cell title="用户评价" is-link @click="gotoevaluation" />
-        <van-cell title="那些花儿" value="2017-05-26">
+        <van-cell title="那些花儿" :value="(datalist[0].evaluation.time||'').split(' ')[0]">
           <!-- 使用 title 插槽来自定义标题 -->
           <template #icon>
             <van-image
@@ -41,7 +41,7 @@
           </template>
           <template #label>1.5米 白橡木 胡桃色</template>
         </van-cell>
-        <p>颜色淡雅，非常漂亮</p>
+        <p>{{datalist[0].evaluation.context}}</p>
         <van-row type="flex">
           <van-col span="9" width="100%">
             <van-image
@@ -72,7 +72,6 @@
           <van-list v-model="loading" :finished="finished" finished-text="没有更多了">
             <van-cell v-for="item in list" :key="item">
               <template #title>
-                <!-- <img v-lazy="item" /> -->
                 <van-image width="100%" height="5rem" :src="item" />
               </template>
             </van-cell>
@@ -103,9 +102,11 @@
 </template>
 
 <script>
-import { postHomeParameterData } from "../../../api/home";
+import {
+  postHomeParameterData,
+  postHomeEvaluationData
+} from "../../../api/home";
 import { Toast } from "vant";
-// postHomeParameterData()
 export default {
   name: "",
 
@@ -114,15 +115,8 @@ export default {
       this.$router.push({ path: "/home/evaluation" });
     },
     backHistory() {
-      // const post = postHomeParameterData();
-      // post.then(data => {
-
-      //   console.log(data[0].name);
-      //   this.aaa = data[0].name;
-      // });
       // 点击跳转至上次浏览页面
       this.$router.go(-1); //
-      // console.log(yyt)
     },
     buy() {
       this.show = this.show == true || this.show == false;
@@ -135,18 +129,16 @@ export default {
       Toast("点击按钮");
     }
   },
-  created() {
-    console.log(this.$route.query.id);
-    const post = postHomeParameterData();
+  created() {postHomeParameterData
+    const post = postHomeParameterData("4");
     post.then(data => {
-      console.log(data);
-      data.forEach(item => {
-        // console.log(item);
-        if (item.id === parseInt(this.$route.query.id)) {
-          this.postdata = item;
-          console.log(this.postdata);
-        }
+      data.data.forEach((item, i) => {
+        this.datalist[i] = Object.assign(this.datalist[i], item);
       });
+    });
+    const post2 = postHomeEvaluationData("1");
+    post2.then(data => {
+      this.datalist[0].evaluation = data.data[0];
     });
   },
   data() {
@@ -252,9 +244,10 @@ export default {
       finished: false,
       datalist: [
         {
-          magetop: require("../../../assets/png/home/canshu-@3x.png"),
+          evaluation: "",
+          img: require("../../../assets/png/home/canshu-@3x.png"),
           name: "现代风格实木圆角餐桌",
-          price: "￥6000",
+          price: "6000",
           imagebottom: [
             require("../../../assets/png/home/goods/2@3x.png"),
             require("../../../assets/png/home/goods/3@3x.png"),
