@@ -168,7 +168,7 @@ const routes = [{
     path: "/login",
     redirect: "/login/login",
     component: () =>
-      import( /* webpackChunkName: "login" */ "../views/login/index.vue"),
+      import(/* webpackChunkName: "login" */ "../views/login/index.vue"),
     children: loginChildren
   },
   {
@@ -181,7 +181,7 @@ const routes = [{
     path: "/car/confirm",
     name: "car/confirm",
     component: () =>
-      import( /* webpackChunkName: "car" */ "../views/car/confirm.vue")
+      import(/* webpackChunkName: "car" */ "../views/car/confirm.vue")
   },
   {
     name: "*",

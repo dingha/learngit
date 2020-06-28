@@ -10,7 +10,12 @@
         </template>
         <template #default>
           <van-cell-group>
-            <van-cell :van-tag="12213" v-for="(datas, index) in data.content" :key="index">
+            <van-cell
+              @click="gotoparameter(datas)"
+              :van-tag="12213"
+              v-for="(datas, index) in data.content"
+              :key="index"
+            >
               <template #title>
                 <span class="custom-title">{{datas.name}}</span>
                 <span class="custom-title">{{datas.ename}}</span>
@@ -27,6 +32,16 @@
 import { postClassData, postClassData2 } from "../../api/class";
 export default {
   name: "",
+  methods: {
+    gotoparameter(datas) {
+      console.log(datas);
+      const goodsId = datas.id;
+      this.$router.push({
+        path: "/home/parameter",
+        query: { goodsId: goodsId }
+      });
+    }
+  },
   created() {
     // 获取数据并合并到本地中
     const post1 = postClassData("1");
@@ -34,15 +49,11 @@ export default {
     post1.then(data => {
       data.data.forEach((item, i) => {
         this.datalist[i] = Object.assign(this.datalist[i], item);
-
-        console.log(this.datalist);
       });
     });
     post2.then(data => {
       data.data.forEach((item, i) => {
         this.datalist[i].content = data.data;
-
-        console.log(this.datalist);
       });
     });
   },

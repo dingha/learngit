@@ -30,7 +30,7 @@ export default {
   name: "",
   methods: {
     gotoparameter() {
-      this.$router.push({ path: "/home/parameter" });
+      this.$router.push({ path: "/home/parameter", query: { goodsId: "3" } });
     }
   },
   data() {

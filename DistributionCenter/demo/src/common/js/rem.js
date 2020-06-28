@@ -1,4 +1,4 @@
-(function() {
+(function () {
   function resize() {
     const html = document.documentElement;
     const width = html.clientWidth; //计算移动端的宽度

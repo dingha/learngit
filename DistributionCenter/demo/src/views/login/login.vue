@@ -196,22 +196,18 @@ export default {
         default:
           return;
       }
-    }, //to="/login/welcome"
+    },
     login() {
       if (this.logtel == "") {
         this.logtelerr = true;
       } else if (this.logpwd == "") {
         this.logpwderr = true;
       } else {
-        const loginpost = postLoginData(
-          this.logtel,
-          this.logpwd
-        );
+        const loginpost = postLoginData(this.logtel, this.logpwd);
         loginpost.then(data => {
           console.log(data);
-          Toast(data.data.msg);
+          this.$router.push({ path: "/login/welcome" });
         });
-        // this.$router.push({ path: "/login/welcome" });
       }
     },
     register() {

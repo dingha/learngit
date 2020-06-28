@@ -2,7 +2,14 @@
 <template>
   <div class="class">
     <form action="/">
-      <van-search show-action left-icon shape="round" background="#fff" placeholder="请输入关键字">
+      <van-search
+        @click="gotogoods"
+        show-action
+        left-icon
+        shape="round"
+        background="#fff"
+        placeholder="请输入关键字"
+      >
         <template #right-icon>
           <van-icon name="search" />
         </template>
@@ -35,7 +42,7 @@ export default {
   name: "",
   created() {
     // 获取数据并合并到本地中
-    
+
     const post = postClassData("0");
     post.then(data => {
       data.data.forEach((item, i) => {
@@ -77,6 +84,9 @@ export default {
     };
   },
   methods: {
+    gotogoods() {
+      this.$router.push({ path: "/home/searchgoods" });
+    },
     gotocar() {
       this.$router.push({
         path: "/car",

@@ -12,11 +12,11 @@
 <script>
 export default {
   name: "",
-  methods: {
+  methods: { 
     gotoparameter() {
       this.$router.push({
         path: "/home/parameter",
-        query: { goodsId: "1" }
+        query: { goodsId: "4" }
       });
     }
   },

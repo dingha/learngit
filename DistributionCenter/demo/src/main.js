@@ -50,7 +50,7 @@ import {
   CountDown,
   RadioGroup,
   Radio,
-  Toast 
+  Toast
 } from "vant";
 
 import a from "utils";

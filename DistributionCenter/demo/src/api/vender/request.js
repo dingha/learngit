@@ -5,20 +5,21 @@ const baseOptions = {
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
-    "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMzU4ODEzNzU0MCJ9.NTM7eyQ2apaezBvGUhFgh-inIUBZybkLKaw3HL8GBeY"
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMzU4ODEzNzU0MCJ9.NTM7eyQ2apaezBvGUhFgh-inIUBZybkLKaw3HL8GBeY"
   }
 };
-
 export default (url, options) => {
   return axios({
-    url,
-    ...options,
-    ...baseOptions
-  })
+      url,
+      ...options,
+      ...baseOptions
+    })
     .then(res => {
       const {
         status,
-        data: { code },
+        data: {
+          code
+        },
         // data
       } = res;
       if (status == 200 && code == 0) {
@@ -26,7 +27,9 @@ export default (url, options) => {
       }
     })
     .catch(err => {
-      const { message } = err;
+      const {
+        message
+      } = err;
       console.log(message.toLowerCase());
     });
 };
