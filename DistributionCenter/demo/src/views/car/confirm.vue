@@ -23,7 +23,7 @@
       <van-cell-group v-model="result" class="confirm-content-content">
         <div class="confirm-cell-content" v-for="(data, index) in datalist" :key="index">
           <p class="confirm-title">
-            <van-cell :name="index">{{data.title}}</van-cell>
+            <van-cell :name="index">家居 Design</van-cell>
           </p>
           <van-cell class="van-cell-content" :name="index">
             <template #default>
@@ -31,23 +31,23 @@
                 num="32"
                 price="2.00"
                 :title="data.name"
-                :desc="data.specifications"
-                thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
+                desc="400*400*56cm;黑虎桃木"
+                :thumb="data.img"
               >
                 <template #tags>
                   <p>{{data.color}}</p>
                 </template>
                 <template #num>
-                  <van-stepper integer />
+                  <van-stepper @change="onstepper" v-model="data.num" integer />
                 </template>
                 <template #footer>
                   <div class="footer-top">
                     <van-field rows="1" autosize label="留言：" type="textarea" placeholder="请输入留言" />
                   </div>
                   <div class="footer-bottom">
-                    <span class="footer-bottom-num">共计 1 件商品</span>
+                    <!-- <span class="footer-bottom-num">共计 {{data.num}} 件商品</span>
                     <span>小计：</span>
-                    <span class="footer-bottom-price">￥290</span>
+                    <span class="footer-bottom-price">￥{{data.price}}</span>-->
                   </div>
                 </template>
               </van-card>
@@ -68,17 +68,18 @@
         </van-cell>
       </van-cell-group>
     </div>
+
     <div class="confirm-buttom">
       <van-cell title="单元格" value="内容" label="描述信息">
         <template #title>
           <span>合计：</span>
-          <span>￥870</span>
+          <span>￥{870}</span>
         </template>
         <template #label>
           <span>共3件商品</span>
         </template>
         <template #default>
-          <van-button color="rgba(212, 33, 29, 1)" type="danger">提交订单</van-button>
+          <van-button color="rgba(212, 33, 29, 1)" @click="onSubmit" type="danger">提交订单</van-button>
         </template>
       </van-cell>
     </div>
@@ -86,29 +87,26 @@
 </template>
 
 <script>
+import { postCarAddshopcarorderData } from "../../api/car";
 export default {
   name: "",
+  created() {
+    this.$route.query.data.forEach((item, i) => {
+      if (i < this.datalist.length) {
+        this.datalist[i] = Object.assign(this.datalist[i], item);
+      } else {
+        this.datalist.push(item);
+      }
+    });
+    console.log(this.datalist);
+  },
   data() {
     return {
       checked: false,
       result: [true],
       datalist: [
         {
-          image: require("../../assets/png/home/goods/2@3x.png"),
-          title: "家居 Design",
-          name: "木质设计感茶几",
-          specifications: "400*400*56cm;黑虎桃木",
-          color: "胡桃木色"
-        },
-        {
-          image: require("../../assets/png/home/goods/2@3x.png"),
-          title: "家居 Design",
-          name: "木质设计感茶几",
-          specifications: "400*400*56cm;黑虎桃木",
-          color: "胡桃木色"
-        },
-        {
-          image: require("../../assets/png/home/goods/2@3x.png"),
+          img: require("../../assets/png/home/goods/2@3x.png"),
           title: "家居 Design",
           name: "木质设计感茶几",
           specifications: "400*400*56cm;黑虎桃木",
@@ -118,6 +116,31 @@ export default {
     };
   },
   methods: {
+    onSubmit() {
+      this.datalist.forEach(item => {
+        console.log(item);
+        const post = postCarAddshopcarorderData(item);
+        post
+          .then(data => {
+            console.log(data);
+            if (data.data.msg === "添加成功") {
+              this.$router.push({
+                path: "/car/payment",
+                query: { id: "/car/payment", data: this.datalist }
+              });
+            }
+            return data;
+          })
+          .catch(err => {
+            return err;
+          });
+      });
+    },
+    // 进步器
+    onstepper(string) {
+      console.log(string);
+      console.log(this.datalist[0].num);
+    },
     onClickLeft() {
       this.$router.go(-1);
     },

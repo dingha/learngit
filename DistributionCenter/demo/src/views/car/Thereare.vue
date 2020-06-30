@@ -1,72 +1,148 @@
 <!--  -->
 <template>
-  <div class="thereare">
-    <van-checkbox-group v-model="result" ref="checkboxGroup">
-      <div class="thereare-checkbox-content" v-for="(data, index) in datalist" :key="index">
-        <p class="thereare-title">
-          <van-checkbox :name="index">{{data.title}}</van-checkbox>
-        </p>
-        <van-checkbox class="van-checkbox-content" :name="index">
-          <template #default>
-            <van-card
-              num="2"
-              price="2.00"
-              :title="data.name"
-              :desc="data.specifications"
-              thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
-            >
-              <template #tags>
-                <p>{{data.color}}</p>
-              </template>
-              <template #footer>
-                <span>的暂未编辑语言</span>
-                <span>留言</span>
-              </template>
-            </van-card>
-          </template>
-        </van-checkbox>
+  <div class="car">
+    <div class="thereare" v-if="thereareshow">
+      <van-checkbox-group v-model="results" ref="checkboxGroup">
+        <div class="thereare-checkbox-content" v-for="(data, index) in datalist" :key="index">
+          <p class="thereare-title">
+            <van-checkbox label-disabled @click="oncheckbox" :name="data">家居 Design</van-checkbox>
+          </p>
+          <van-checkbox
+            :v-model="true"
+            label-disabled
+            @click="oncheckbox"
+            class="van-checkbox-content"
+            :name="data"
+          >
+            <template #default>
+              <van-card
+                :num="data.num"
+                :price="data.price"
+                :title="data.name"
+                desc="400*400*56cm;黑虎桃木"
+                :thumb="data.img"
+              >
+                <template #tags>
+                  <p>胡桃木色</p>
+                </template>
+                <template #footer>
+                  <span>的暂未编辑语言</span>
+                  <span>留言</span>
+                </template>
+              </van-card>
+            </template>
+          </van-checkbox>
+        </div>
+      </van-checkbox-group>
+      <div class="car-footer">
+        <van-submit-bar :price="totalprice" @submit="onSubmit" type="warning" button-text="去结算">
+          <van-checkbox v-model="checked" @click="checkAll">全选</van-checkbox>
+        </van-submit-bar>
       </div>
-    </van-checkbox-group>
-    <div class="car-footer">
-      <van-submit-bar :price="3050" type="warning" button-text="去结算">
-        <van-checkbox v-model="checked" @click="checkAll">全选</van-checkbox>
-      </van-submit-bar>
+    </div>
+    <div class="car-empty" v-if="emptyshow">
+      <div class="car-empty-content">
+        <van-image
+          width="100%"
+          height="50%"
+          fit="contain"
+          :src="require('../../assets/png/car/nullcar@3x.png')"
+        />
+        <p>购物车还是空的</p>
+      </div>
+      <div class="car-footer">
+        <van-submit-bar :price="3050" type="warning" button-text="去结算">
+          <van-checkbox @click="checkAll">全选</van-checkbox>
+        </van-submit-bar>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { postCarOrderData } from "../../api/car";
+
 export default {
   name: "",
+  created() {
+    // 商品信息
+    const post = postCarOrderData();
+    post
+      .then(data => {
+        console.log(data);
+        data.data.data.forEach((item, i) => {
+          if (i < this.datalist.length) {
+            this.datalist[i] = Object.assign(this.datalist[i], item);
+          } else {
+            this.datalist.push(item);
+          }
+        });
+        if (data.data.count >= 0) {
+          this.thereareshow = true;
+          this.emptyshow = false;
+        } else {
+          this.thereareshow = false;
+          this.emptyshow = true;
+        }
+      })
+      .catch(err => {
+        return err;
+      });
+  },
   methods: {
+    oncheckbox() {
+      this.totalprice = 0;
+      this.results.forEach(item => {
+        this.totalprice += item.num * item.price;
+      });
+    },
+    // 去结算
+    onSubmit() {
+      if (this.results.length > 0) {
+        this.$router.push({
+          path: "/car/confirm",
+          query: { id: "/car/confirm", data: this.results }
+        });
+      }
+    },
     checkAll() {
-      this.checked
-        ? this.$refs.checkboxGroup.toggleAll(true)
-        : this.$refs.checkboxGroup.toggleAll();
+      this.results = this.datalist;
+      this.checked ? (this.results = this.datalist) : (this.results = []);
+      this.totalprice = 0;
+      this.results.forEach(item => {
+        this.totalprice += item.num * item.price;
+      });
     }
   },
   data() {
     return {
+      checkeds: true,
+      totalprice: 0,
+      results: [],
+      thereareshow: false,
+      emptyshow: true,
       checked: false,
-      result: [true],
+      result: "",
       datalist: [
         {
-          image: require("../../assets/png/home/goods/2@3x.png"),
+          img: require("../../assets/png/home/goods/2@3x.png"),
           title: "家居 Design",
+          name: "木质设计感茶几",
+          specifications: "400*400*56cm;黑虎桃木",
+          color: "胡桃木色",
+          num: 5,
+          price: 10
+        },
+        {
+          img: require("../../assets/png/home/goods/2@3x.png"),
+          title: "家居1 Design",
           name: "木质设计感茶几",
           specifications: "400*400*56cm;黑虎桃木",
           color: "胡桃木色"
         },
         {
-          image: require("../../assets/png/home/goods/2@3x.png"),
-          title: "家居 Design",
-          name: "木质设计感茶几",
-          specifications: "400*400*56cm;黑虎桃木",
-          color: "胡桃木色"
-        },
-        {
-          image: require("../../assets/png/home/goods/2@3x.png"),
-          title: "家居 Design",
+          img: require("../../assets/png/home/goods/2@3x.png"),
+          title: "家居2 Design",
           name: "木质设计感茶几",
           specifications: "400*400*56cm;黑虎桃木",
           color: "胡桃木色"
@@ -77,6 +153,10 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
+.car {
+  width: 100%;
+  height: 100%;
+}
 .thereare {
   width: 100%;
   height: 100%;
@@ -138,6 +218,41 @@ export default {
             }
           }
         }
+      }
+    }
+  }
+  .car-footer {
+    position: absolute;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 8%;
+    .van-submit-bar {
+      position: absolute;
+      .van-button {
+        border-radius: 0;
+        background: rgba(213, 35, 33, 1);
+      }
+    }
+  }
+}
+
+.car-empty {
+  width: 100%;
+  height: 100%;
+  .car-empty-content {
+    width: 100%;
+    height: 92%;
+    /deep/ {
+      img {
+        padding-top: 2rem;
+        width: 95%;
+        height: 50%;
+      }
+      p {
+        text-align: center;
+        font-size: 0.35rem;
+        color: rgba(0, 0, 0, 0.5);
       }
     }
   }

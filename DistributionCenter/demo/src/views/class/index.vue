@@ -23,7 +23,7 @@
         <van-sidebar v-model="activeKey">
           <van-sidebar-item
             :title="data.name"
-            :to="{ path: data.push,query: {id:data.querys}}"
+            :to="{ path: data.push,query: {id:data.querys,name:data.querys}}"
             v-for="(data, index) in datalist"
             :key="index"
           />
@@ -57,7 +57,7 @@ export default {
         {
           push: "/class/category",
           name: "品类",
-          querys: ""
+          querys: "121"
         },
         {
           push: "/class/space",

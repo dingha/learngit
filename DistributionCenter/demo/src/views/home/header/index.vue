@@ -21,7 +21,7 @@
         <van-icon name="shopping-cart-o" size=".45rem" />
       </div>
     </template>
-  </van-search>
+  </van-search> 
 </template>
 
 <script>

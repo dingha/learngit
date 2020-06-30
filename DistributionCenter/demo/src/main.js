@@ -7,6 +7,7 @@ import "./api/vender/request";
 import "./api/index";
 // eslint-disable-next-line no-unused-vars
 import axios from "axios";
+export const Temporarytoken =[] // 临时的token
 import {
   Button,
   Tabbar,

@@ -2,17 +2,15 @@ import axios from "axios";
 
 const baseOptions = {
   method: "POST",
-  timeout: 10000,
-  headers: {
-    "Content-Type": "application/json",
-    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMzU4ODEzNzU0MCJ9.NTM7eyQ2apaezBvGUhFgh-inIUBZybkLKaw3HL8GBeY"
-  }
+  timeout: 10000
+  
 };
 export default (url, options) => {
   return axios({
       url,
       ...options,
-      ...baseOptions
+      ...baseOptions,
+      
     })
     .then(res => {
       const {

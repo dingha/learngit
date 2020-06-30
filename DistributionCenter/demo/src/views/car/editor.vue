@@ -1,17 +1,17 @@
 <!--  -->
 <template>
   <div class="editor">
-    <van-checkbox-group v-model="result" ref="checkboxGroup">
+    <van-checkbox-group v-model="results" ref="checkboxGroup">
       <div class="editor-checkbox-content" v-for="(data, index) in datalist" :key="index">
         <p class="editor-title">
-          <van-checkbox :name="index">{{data.title}}</van-checkbox>
+          <van-checkbox label-disabled :name="data">{{data.name}}</van-checkbox>
         </p>
-        <van-checkbox class="van-checkbox-content" :name="index">
+        <van-checkbox label-disabled class="van-checkbox-content" :name="data">
           <template #default>
             <van-cell-group>
               <van-cell center>
                 <template #title>
-                  <img v-lazy="data.image" />
+                  <img v-lazy="data.img" />
                 </template>
                 <template #default>
                   <van-stepper integer />
@@ -33,47 +33,62 @@
         </template>
         <template #default>
           <van-button type="default">收藏</van-button>
-          <van-button type="danger">删除</van-button>
+          <van-button type="danger" @click="ondelete">删除</van-button>
         </template>
       </van-cell>
-      <!-- <van-submit-bar :price="3050" type="warning" button-text="删除">
-        <van-checkbox v-model="checked" @click="checkAll">全选</van-checkbox>
-      </van-submit-bar>-->
     </div>
   </div>
 </template>
 
 <script>
+import { postCarDeleteData, postCarOrderData } from "../../api/car";
 export default {
   name: "",
+  created() {
+    const post = postCarOrderData();
+    post
+      .then(data => {
+        console.log(data);
+        data.data.data.forEach((item, i) => {
+          if (i < this.datalist.length) {
+            this.datalist[i] = Object.assign(this.datalist[i], item);
+          } else {
+            this.datalist.push(item);
+          }
+        });
+        console.log(this.datalist);
+      })
+      .catch(err => {
+        return err;
+      });
+  },
   methods: {
+    ondelete() {
+      console.log(this.results);
+      this.results.forEach(item => {
+        const post = postCarDeleteData(item.id);
+        post.then(data => {
+          console.log(data);
+        });
+      });
+    },
     checkAll() {
-      this.checked
-        ? this.$refs.checkboxGroup.toggleAll(true)
-        : this.$refs.checkboxGroup.toggleAll();
+      this.results = this.datalist;
+      this.checked ? (this.results = this.datalist) : (this.results = []);
+      this.totalprice = 0;
+      this.results.forEach(item => {
+        this.totalprice += item.num * item.price;
+      });
     }
   },
   data() {
     return {
       checked: false,
-      result: [true],
+      result: "",
+      results: [],
       datalist: [
         {
-          image: require("../../assets/png/home/goods/2@3x.png"),
-          title: "家居 Design",
-          name: "木质设计感茶几",
-          specifications: "400*400*56cm;黑虎桃木",
-          color: "胡桃木色"
-        },
-        {
-          image: require("../../assets/png/home/goods/2@3x.png"),
-          title: "家居 Design",
-          name: "木质设计感茶几",
-          specifications: "400*400*56cm;黑虎桃木",
-          color: "胡桃木色"
-        },
-        {
-          image: require("../../assets/png/home/goods/2@3x.png"),
+          img: require("../../assets/png/home/goods/2@3x.png"),
           title: "家居 Design",
           name: "木质设计感茶几",
           specifications: "400*400*56cm;黑虎桃木",
@@ -105,7 +120,7 @@ export default {
         .van-checkbox {
           padding: 0rem 0.2rem;
           height: 100%;
-          width: 100%;
+          width: calc(100% - 0.4rem);
           align-items: center;
           display: flex;
         }

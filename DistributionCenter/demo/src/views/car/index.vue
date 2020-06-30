@@ -13,13 +13,13 @@
 <script>
 export default {
   name: "",
+
   methods: {
     onClickRight() {
-      console.log(this.rightText);
       let names = "";
       this.rightText === "编辑"
         ? ((this.rightText = "完成"), (names = "/car/editor"))
-        : ((this.rightText = "编辑"), (names = "/car/empty"));
+        : ((this.rightText = "编辑"), (names = "/car/thereare"));
       this.$router.push({
         path: "/car",
         query: { id: "/car", name: names }
@@ -27,7 +27,6 @@ export default {
     },
     checkAll() {
       this.$emit("my-click", "我很好");
-      // this.$refs.checkboxGroup.toggleAll(true);
     }
   },
   data() {

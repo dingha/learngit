@@ -93,7 +93,7 @@
         <van-goods-action-icon icon="chat-o" text="客服" />
         <van-goods-action-icon icon="cart-o" text="购物车" />
         <van-goods-action-icon icon="star" text="已收藏" />
-        <van-goods-action-button type="default" text="加入购物车" />
+        <van-goods-action-button type="default" @click="buy" text="加入购物车" />
         <van-goods-action-button type="danger" @click="buy" text="立即购买"></van-goods-action-button>
       </van-goods-action>
       <van-sku
@@ -111,7 +111,8 @@
 import {
   postHomeParameterData,
   postHomeEvaluationData,
-  postHomeCarData
+  postHomeCarData,
+  postHomeCarAddData
 } from "../../../api/home";
 import { Toast } from "vant";
 export default {
@@ -127,7 +128,6 @@ export default {
     },
     buy() {
       this.show = this.show == true || this.show == false;
-      console.log(this.show);
     },
     onClickIcon() {
       Toast("点击图标");
@@ -136,11 +136,44 @@ export default {
       Toast("点击按钮");
     },
     // 添加购物车事件
-    onAddCartClicked() {
-      console.log(1);
+    onAddCartClicked(e) {
+      const goodsId = this.$route.query.goodsId;
+      const img = this.datalist[0].img;
+
+      const post = postHomeCarAddData(
+        goodsId,
+        e.selectedSkuComb.goodsAttrIds,
+        this.datalist[0].name,
+        e.selectedSkuComb.price,
+        e.selectedNum,
+        img
+      );
+      post
+        .then(data => {
+          Toast(data.msg);
+          return data;
+        })
+        .catch(err => {
+          return err;
+        });
     },
+    // 立即购买事件
     onBuyClicked(e) {
-      console.log(e);
+      const goodsId = this.$route.query.goodsId;
+      const img = this.datalist[0].img;
+      this.datalists.push({
+        goodsId: goodsId,
+        goodsSkuId: 1,
+        name: this.datalist[0].name,
+        price: e.selectedSkuComb.price,
+        num: e.selectedNum,
+        addressId: 1,
+        img: img
+      });
+      this.$router.push({
+        path: "/car/confirm",
+        query: { id: "/car/confirm", data: this.datalists }
+      });
     }
   },
   created() {
@@ -160,10 +193,34 @@ export default {
     const post3 = postHomeCarData("1");
     post3
       .then(data => {
-        console.log(data);
-        // data.data.forEach((item, i) => {
-        //   this.datalist[i] = Object.assign(this.datalist[i], item);
-        // });
+        const goodsAttrId = [];
+        data.data.forEach((item, i) => {
+          this.sku.tree[i].k = item.attrName;
+          goodsAttrId[i] = item.id;
+        });
+
+        goodsAttrId.forEach((item1, i) => {
+          const dome = [];
+          data.data2.forEach(item2 => {
+            if (item1 === item2.goodsAttrId) {
+              dome.push({ name: item2.nature, id: item2.id });
+            }
+          });
+          dome.forEach((item, k) => {
+            this.sku.tree[i].v[k].id = item.id;
+            this.sku.tree[i].v[k].name = item.name;
+          });
+        });
+
+        data.data3.forEach((item, i) => {
+          item.goodsAttrIds.split(",");
+          this.sku.list[i].s1 = item.goodsAttrIds.split(",")[2].split(":")[1];
+          this.sku.list[i].s2 = item.goodsAttrIds.split(",")[1].split(":")[1];
+          this.sku.list[i].s3 = item.goodsAttrIds.split(",")[0].split(":")[1];
+          this.sku.list[i].stock_num = item.stock;
+          this.sku.list[i].price = item.price;
+          this.sku.list[i].goodsAttrIds = item.goodsAttrIds;
+        });
       })
       .catch(err => {
         return err;
@@ -187,18 +244,23 @@ export default {
         // 可以理解为一个商品可以有多个规格类目，一个规格类目下可以有多个规格值。
         tree: [
           {
-            k: "尺寸", // skuKeyName：规格类目名称
+            k: "", // skuKeyName：规格类目名称
             v: [
               {
-                id: "1111", // skuValueId：规格值 id
-                name: "150*40*45cm", // skuValueName：规格值名称
-                // imgUrl: "https://img.yzcdn.cn/1.jpg", // 规格类目图片，只有第一个规格类目可以定义图片
+                id: "", // skuValueId：规格值 id
+                name: "", // skuValueName：规格值名称
                 previewImgUrl:
                   "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1593349679787&di=9fd833e9cfe40a2a9df74003ac9a4bee&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F36%2F48%2F19300001357258133412489354717.jpg" // 用于预览显示的规格类目图片
               },
               {
-                id: "1122",
-                name: "150*40*65cm",
+                id: "", // skuValueId：规格值 id
+                name: "", // skuValueName：规格值名称
+                previewImgUrl:
+                  "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1593349679787&di=9fd833e9cfe40a2a9df74003ac9a4bee&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F36%2F48%2F19300001357258133412489354717.jpg" // 用于预览显示的规格类目图片
+              },
+              {
+                id: "",
+                name: "",
                 previewImgUrl:
                   "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1593349679787&di=9fd833e9cfe40a2a9df74003ac9a4bee&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F36%2F48%2F19300001357258133412489354717.jpg"
               }
@@ -206,11 +268,23 @@ export default {
             k_s: "s1" // skuKeyStr：sku 组合列表（下方 list）中当前类目对应的 key 值，value 值会是从属于当前类目的一个规格值 id
           },
           {
-            k: "材质", // skuKeyName：规格类目名称
+            k: "", // skuKeyName：规格类目名称
             v: [
               {
-                id: "2211", // skuValueId：规格值 id
-                name: "白橡木", // skuValueName：规格值名称
+                id: "", // skuValueId：规格值 id
+                name: "", // skuValueName：规格值名称
+                previewImgUrl:
+                  "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1593349679787&di=9fd833e9cfe40a2a9df74003ac9a4bee&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F36%2F48%2F19300001357258133412489354717.jpg" // 用于预览显示的规格类目图片
+              },
+              {
+                id: "", // skuValueId：规格值 id
+                name: "", // skuValueName：规格值名称
+                previewImgUrl:
+                  "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1593349679787&di=9fd833e9cfe40a2a9df74003ac9a4bee&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F36%2F48%2F19300001357258133412489354717.jpg" // 用于预览显示的规格类目图片
+              },
+              {
+                id: "", // skuValueId：规格值 id
+                name: "", // skuValueName：规格值名称
                 previewImgUrl:
                   "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1593349679787&di=9fd833e9cfe40a2a9df74003ac9a4bee&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F36%2F48%2F19300001357258133412489354717.jpg" // 用于预览显示的规格类目图片
               }
@@ -218,18 +292,13 @@ export default {
             k_s: "s2" // skuKeyStr：sku 组合列表（下方 list）中当前类目对应的 key 值，value 值会是从属于当前类目的一个规格值 id
           },
           {
-            k: "颜色", // skuKeyName：规格类目名称
+            k: "", // skuKeyName：规格类目名称
             v: [
               {
-                id: "3311", // skuValueId：规格值 id
-                name: "胡桃色", // skuValueName：规格值名称
+                id: "", // skuValueId：规格值 id
+                name: "", // skuValueName：规格值名称
                 previewImgUrl:
                   "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1593349679787&di=9fd833e9cfe40a2a9df74003ac9a4bee&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F36%2F48%2F19300001357258133412489354717.jpg" // 用于预览显示的规格类目图片
-              },
-              {
-                id: "3322",
-                name: "红木色",
-                previewImgUrl: "https://img.yzcdn.cn/2p.jpg"
               }
             ],
             k_s: "s3" // skuKeyStr：sku 组合列表（下方 list）中当前类目对应的 key 值，value 值会是从属于当前类目的一个规格值 id
@@ -238,6 +307,7 @@ export default {
         // 所有 sku 的组合列表，比如红色、M 码为一个 sku 组合，红色、S 码为另一个组合
         list: [
           {
+            goodsAttrIds: "",
             id: 2259, // skuId，下单时后端需要
             price: 100, // 价格（单位分）
             s1: "1111", // 规格类目 k_s 为 s1 的对应规格值 id
@@ -246,6 +316,7 @@ export default {
             stock_num: 112 // 当前 sku 组合对应的库存
           },
           {
+            goodsAttrIds: "",
             id: 2211, // skuId，下单时后端需要
             price: 100, // 价格（单位分）
             s1: "1111", // 规格类目 k_s 为 s1 的对应规格值 id
@@ -254,6 +325,7 @@ export default {
             stock_num: 112 // 当前 sku 组合对应的库存
           },
           {
+            goodsAttrIds: "",
             id: 2222, // skuId，下单时后端需要
             price: 100, // 价格（单位分）
             s1: "1122", // 规格类目 k_s 为 s1 的对应规格值 id
@@ -262,6 +334,52 @@ export default {
             stock_num: 112 // 当前 sku 组合对应的库存
           },
           {
+            goodsAttrIds: "",
+            id: 2233, // skuId，下单时后端需要
+            price: 1200, // 价格（单位分）
+            s1: "1122", // 规格类目 k_s 为 s1 的对应规格值 id
+            s2: "2211", // 规格类目 k_s 为 s2 的对应规格值 id
+            s3: "3322", // 最多包含3个规格值，为0表示不存在该规格
+            stock_num: 112 // 当前 sku 组合对应的库存
+          },
+          {
+            goodsAttrIds: "",
+            id: 2233, // skuId，下单时后端需要
+            price: 1200, // 价格（单位分）
+            s1: "1122", // 规格类目 k_s 为 s1 的对应规格值 id
+            s2: "2211", // 规格类目 k_s 为 s2 的对应规格值 id
+            s3: "3322", // 最多包含3个规格值，为0表示不存在该规格
+            stock_num: 112 // 当前 sku 组合对应的库存
+          },
+          {
+            goodsAttrIds: "",
+            id: 2233, // skuId，下单时后端需要
+            price: 1200, // 价格（单位分）
+            s1: "1122", // 规格类目 k_s 为 s1 的对应规格值 id
+            s2: "2211", // 规格类目 k_s 为 s2 的对应规格值 id
+            s3: "3322", // 最多包含3个规格值，为0表示不存在该规格
+            stock_num: 112 // 当前 sku 组合对应的库存
+          },
+          {
+            goodsAttrIds: "",
+            id: 2233, // skuId，下单时后端需要
+            price: 1200, // 价格（单位分）
+            s1: "1122", // 规格类目 k_s 为 s1 的对应规格值 id
+            s2: "2211", // 规格类目 k_s 为 s2 的对应规格值 id
+            s3: "3322", // 最多包含3个规格值，为0表示不存在该规格
+            stock_num: 112 // 当前 sku 组合对应的库存
+          },
+          {
+            goodsAttrIds: "",
+            id: 2233, // skuId，下单时后端需要
+            price: 1200, // 价格（单位分）
+            s1: "1122", // 规格类目 k_s 为 s1 的对应规格值 id
+            s2: "2211", // 规格类目 k_s 为 s2 的对应规格值 id
+            s3: "3322", // 最多包含3个规格值，为0表示不存在该规格
+            stock_num: 112 // 当前 sku 组合对应的库存
+          },
+          {
+            goodsAttrIds: "",
             id: 2233, // skuId，下单时后端需要
             price: 1200, // 价格（单位分）
             s1: "1122", // 规格类目 k_s 为 s1 的对应规格值 id
@@ -270,7 +388,7 @@ export default {
             stock_num: 112 // 当前 sku 组合对应的库存
           }
         ],
-        price: "1.00", // 默认价格（单位元）
+        price: "3.00", // 默认价格（单位元）
         stock_num: 227, // 商品总库存
         collection_id: 2261, // 无规格商品 skuId 取 collection_id，否则取所选 sku 组合对应的 id
         none_sku: false, // 是否无规格商品
@@ -319,6 +437,7 @@ export default {
           留言: "留言信息"
         }
       },
+      datalists: [],
       active: 2,
       list: [
         require("../../../assets/png/home/goods/1@3x.png"),

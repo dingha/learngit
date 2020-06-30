@@ -1,4 +1,4 @@
-export const API_HOME_DATA = './api/wangh_fxsc/category/lookCategory.Action' //首页数据
+export const API_HOME_DATA = './api/wangh_fxsc/category/lookCategory.Action'; //首页数据
 export const API_HOME_POSITIONING_DATA = './api/wangh_fxsc/address/selCity.Action' // 首页地址数据
 export const API_HOME_GOODS_DATA = './api/wangh_fxsc/goods/selGoods.Action' // 商品参数数据&&搜索
 export const API_CLASS_class_CATEGORY_CATEGORY_DATA = './api/wangh_fxsc/category/selCategory.Action' // 分类数据
@@ -12,4 +12,7 @@ export const API_LOGIN_SETFORGOTTEN_MODIFY_DATA = './api/wangh_fxsc/login/EditLo
 export const API_HOME_HEADER_SEARCH_DATA = './api/wangh_fxsc/goods/selGoods.Action' // 头部商品搜索
 
 export const API_HOME_CAR_GOODS_DATA = './api/wangh_fxsc/goods/selGoodsAttra.Action' // 具体商品购物车
-
+export const API_HOME_CAR_ADD_DATA = './api/wangh_fxsc/shopCar/addShopCar.Action' // 添加到购物车
+export const API_CAR_ORDER_DATA = './api/wangh_fxsc/shopCar/selShopCar.Action' // 查询购物车订单信息
+export const API_CAR_ADDSHOPCARORDER_DATA = './api/wangh_fxsc/order/addShopCarOrder.Action' // 从购物车下订单
+export const API_CAR_DELETE_DATA = './api/wangh_fxsc/shopCar/editShopCar.Action' // 删除购物车

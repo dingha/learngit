@@ -49,7 +49,7 @@ export default {
   name: "",
   methods: {
     onClickLeft() {
-      this.$router.go(-1);
+      this.$router.go(-2);
     },
     onClickRight() {
       //   Toast("按钮");

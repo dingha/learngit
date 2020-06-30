@@ -5,7 +5,8 @@ import {
   API_HOME_GOODS_EVALUATION_DATA,
   API_HOME_HEADER_SEARCH_DATA,
   API_HOME_POSITIONING_DATA,
-  API_HOME_CAR_GOODS_DATA
+  API_HOME_CAR_GOODS_DATA,
+  API_HOME_CAR_ADD_DATA
 } from "./URLS.js";
 
 // 获取首页数据
@@ -61,6 +62,32 @@ export const postHomeCarData = (item) => {
         "goods": {
           "id": item
         }
+      }
+    })
+    .then(data => {
+      return data.data;
+    })
+    .catch(err => {
+      return err;
+    });
+};
+// 添加到购物车
+export const postHomeCarAddData = (id, attr, name, price, num, img) => {
+  return request(API_HOME_CAR_ADD_DATA, {
+      data: {
+        "goods": {
+          "id": id,
+          "attr": attr,
+          "name": name,
+          "price": price,
+          "num": num,
+          "img": img
+        }
+      },
+      headers: {
+        "Content-Type": "application/json",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNTY3NTUxOTAyNiJ9.8And-u_VNz5z9GLkBxT6voFIYbgpyDfhvd7a6PGzl7U"
+
       }
     })
     .then(data => {

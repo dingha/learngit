@@ -156,6 +156,7 @@
 
 <script>
 import { Toast } from "vant";
+import { Temporarytoken } from "../../main";
 import {
   postLoginRegisteredSmsData,
   postLoginRegisteredData,
@@ -206,7 +207,12 @@ export default {
         const loginpost = postLoginData(this.logtel, this.logpwd);
         loginpost.then(data => {
           console.log(data);
-          this.$router.push({ path: "/login/welcome" });
+          Temporarytoken.push({ name: data.data.data2 });
+          if (data.data.msg === "登入成功") {
+            this.$router.push({ path: "/login/welcome" });
+          } else {
+            Toast(data.data.msg);
+          }
         });
       }
     },

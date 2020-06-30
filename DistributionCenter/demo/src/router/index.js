@@ -56,25 +56,17 @@ const bottomChildren = [{
           return "/car/confirm";
         case "/car/editor":
           return "/car/editor";
-        case "/car/empty":
-          return "/car/empty";
         case "/car/messageboard":
           return "/car/messageboard";
         case "/car/payment":
           return "/car/payment";
         default:
-          return "/car/empty";
+          return "/car/Thereare";
       }
     },
     component: () =>
       import( /* webpackChunkName: "car" */ "../views/car/index.vue"),
     children: [{
-        path: "/car/empty",
-        name: "car/empty",
-        component: () =>
-          import( /* webpackChunkName: "car" */ "../views/car/empty.vue")
-      },
-      {
         path: "/car/Thereare",
         name: "car/Thereare",
         component: () =>
@@ -168,7 +160,7 @@ const routes = [{
     path: "/login",
     redirect: "/login/login",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../views/login/index.vue"),
+      import( /* webpackChunkName: "login" */ "../views/login/index.vue"),
     children: loginChildren
   },
   {
@@ -181,7 +173,7 @@ const routes = [{
     path: "/car/confirm",
     name: "car/confirm",
     component: () =>
-      import(/* webpackChunkName: "car" */ "../views/car/confirm.vue")
+      import( /* webpackChunkName: "car" */ "../views/car/confirm.vue")
   },
   {
     name: "*",

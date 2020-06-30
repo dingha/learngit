@@ -5,14 +5,14 @@
       <van-collapse-item :name="index" v-for="(data, index) in datalist" :key="index">
         <template #right-icon>
           <img v-lazy="data.image" />
-          <p>124</p>
+          <p>{{$route.query.id}}</p>
           <p>124</p>
         </template>
         <template #default>
           <van-cell-group>
             <van-cell :van-tag="12213" is-link>
               <template #title>
-                <span class="custom-title">单元格</span>
+                <span class="custom-title">{{$route.query.id}}</span>
                 <span class="custom-title">单元格</span>
               </template>
             </van-cell>
