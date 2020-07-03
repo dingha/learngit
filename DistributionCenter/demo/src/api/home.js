@@ -14,7 +14,6 @@ export const postHomeData = () => {
   request(API_HOME_DATA)
     .then(data => {
       return data;
-      // console.log(data, "home");
     })
     .catch(err => {
       console.log(err);
@@ -141,7 +140,6 @@ export const postHomeHeaderSearchData = () => {
       }
     })
     .then(data => {
-      // console.log(111, data)
       return data;
     })
     .catch(err => {

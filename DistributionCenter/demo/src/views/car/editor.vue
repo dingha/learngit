@@ -1,54 +1,80 @@
 <!--  -->
 <template>
-  <div class="editor">
-    <van-checkbox-group v-model="results" ref="checkboxGroup">
-      <div class="editor-checkbox-content" v-for="(data, index) in datalist" :key="index">
-        <p class="editor-title">
-          <van-checkbox label-disabled :name="data">{{data.name}}</van-checkbox>
-        </p>
-        <van-checkbox label-disabled class="van-checkbox-content" :name="data">
-          <template #default>
-            <van-cell-group>
-              <van-cell center>
-                <template #title>
-                  <img v-lazy="data.img" />
-                </template>
-                <template #default>
-                  <van-stepper integer />
-                </template>
-              </van-cell>
-              <div class="van-checkbox-content-bottom">
-                <span>的暂未编辑语言</span>
-                <span>留言</span>
-              </div>
-            </van-cell-group>
-          </template>
-        </van-checkbox>
+  <div class="total">
+    <div class="editor">
+      <van-checkbox-group v-if="editorshow" v-model="results" ref="checkboxGroup">
+        <div class="editor-checkbox-content" v-for="(data, index) in datalist" :key="index">
+          <p class="editor-title">
+            <van-checkbox label-disabled :name="data">{{data.name}}</van-checkbox>
+          </p>
+          <van-checkbox label-disabled class="van-checkbox-content" :name="data">
+            <template #default>
+              <van-cell-group>
+                <van-cell center>
+                  <template #title>
+                    <img v-lazy="data.img" />
+                  </template>
+                  <template #default>
+                    <van-stepper @change="onstepper(data)" integer v-model="data.num" />
+                  </template>
+                </van-cell>
+                <div class="van-checkbox-content-bottom">
+                  <span>的暂未编辑语言</span>
+                  <span>留言</span>
+                </div>
+              </van-cell-group>
+            </template>
+          </van-checkbox>
+        </div>
+      </van-checkbox-group>
+
+      <div class="car-empty" v-if="emptyshow">
+        <div class="car-empty-content">
+          <van-image
+            width="100%"
+            height="50%"
+            fit="contain"
+            :src="require('../../assets/png/car/nullcar@3x.png')"
+          />
+          <p>购物车还是空的</p>
+        </div>
       </div>
-    </van-checkbox-group>
-    <div class="car-footer">
-      <van-cell title="单元格" value="内容">
-        <template #title>
-          <van-checkbox v-model="checked" @click="checkAll">全选</van-checkbox>
-        </template>
-        <template #default>
-          <van-button type="default">收藏</van-button>
-          <van-button type="danger" @click="ondelete">删除</van-button>
-        </template>
-      </van-cell>
+
+      <div class="car-footer">
+        <van-cell title="单元格" value="内容">
+          <template #title>
+            <van-checkbox v-model="checked" @click="checkAll">全选</van-checkbox>
+          </template>
+          <template #default>
+            <van-button type="default">收藏</van-button>
+            <van-button type="danger" @click="ondelete">删除</van-button>
+          </template>
+        </van-cell>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { postCarDeleteData, postCarOrderData } from "../../api/car";
+import {
+  postCarDeleteData,
+  postCarOrderData,
+  postCarEditNumData
+} from "../../api/car";
+import { Toast } from "vant";
 export default {
   name: "",
   created() {
     const post = postCarOrderData();
     post
       .then(data => {
-        console.log(data);
+        if (data.data.count === null) {
+          this.emptyshow = true;
+          this.editorshow = false;
+        } else {
+          this.emptyshow = false;
+          this.editorshow = true;
+        }
         data.data.data.forEach((item, i) => {
           if (i < this.datalist.length) {
             this.datalist[i] = Object.assign(this.datalist[i], item);
@@ -56,21 +82,25 @@ export default {
             this.datalist.push(item);
           }
         });
-        console.log(this.datalist);
       })
       .catch(err => {
         return err;
       });
   },
   methods: {
+    // 修改购物车数量
+    onstepper(data) {
+      if (data.num > 0) postCarEditNumData(data.id, data.num);
+      
+    },
     ondelete() {
-      console.log(this.results);
       this.results.forEach(item => {
-        const post = postCarDeleteData(item.id);
-        post.then(data => {
-          console.log(data);
-        });
+        postCarDeleteData(item.id);
       });
+      Toast("删除成功");
+      setTimeout(() => {
+        this.$router.go(0);
+      }, 1000);
     },
     checkAll() {
       this.results = this.datalist;
@@ -83,23 +113,43 @@ export default {
   },
   data() {
     return {
+      editorshow: true,
+      emptyshow: true,
       checked: false,
       result: "",
       results: [],
-      datalist: [
-        {
-          img: require("../../assets/png/home/goods/2@3x.png"),
-          title: "家居 Design",
-          name: "木质设计感茶几",
-          specifications: "400*400*56cm;黑虎桃木",
-          color: "胡桃木色"
-        }
-      ]
+      datalist: []
     };
   }
 };
 </script>
 <style lang='scss' scoped>
+.total {
+  width: 100%;
+  height: 100%;
+}
+
+.car-empty {
+  width: 100%;
+  height: 89%;
+  .car-empty-content {
+    width: 100%;
+    height: 92%;
+    /deep/ {
+      img {
+        padding-top: 2rem;
+        width: 95%;
+        height: 50%;
+      }
+      p {
+        text-align: center;
+        font-size: 0.35rem;
+        color: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+}
+
 .editor {
   width: 100%;
   height: 100%;

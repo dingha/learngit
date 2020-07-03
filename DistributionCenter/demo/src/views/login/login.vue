@@ -206,7 +206,6 @@ export default {
       } else {
         const loginpost = postLoginData(this.logtel, this.logpwd);
         loginpost.then(data => {
-          console.log(data);
           Temporarytoken.push({ name: data.data.data2 });
           if (data.data.msg === "登入成功") {
             this.$router.push({ path: "/login/welcome" });
@@ -230,16 +229,13 @@ export default {
           this.regpwd
         );
         registerpost.then(data => {
-          console.log(data);
           Toast(data.data.msg);
         });
       }
     },
     sendSMS() {
       const sendSMSpost = postLoginRegisteredSmsData(this.regtel);
-
       sendSMSpost.then(data => {
-        console.log(data);
         Toast(data.data.msg);
       });
     },

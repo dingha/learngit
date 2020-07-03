@@ -1,16 +1,16 @@
 import axios from "axios";
-
+import Toast from "vant";
 const baseOptions = {
   method: "POST",
   timeout: 10000
-  
+
 };
 export default (url, options) => {
   return axios({
       url,
       ...options,
       ...baseOptions,
-      
+
     })
     .then(res => {
       const {
@@ -18,22 +18,15 @@ export default (url, options) => {
         data: {
           code
         },
-        // data
       } = res;
       if (status == 200 && code == 0) {
         return res;
       }
+      else{
+        Toast("访问失败")
+      }
     })
     .catch(err => {
-      const {
-        message
-      } = err;
-      console.log(message.toLowerCase());
+      console.log(err)
     });
 };
-
-// function handleError(message) {
-//   if (message.includes('timeout')) return "请求超时，请稍后重试";
-//   else if (message.includes('network')) return "数据加载失败，请稍后重试";
-//   return "未知错误，请稍后重试";
-// }

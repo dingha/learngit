@@ -16,3 +16,7 @@ export const API_HOME_CAR_ADD_DATA = './api/wangh_fxsc/shopCar/addShopCar.Action
 export const API_CAR_ORDER_DATA = './api/wangh_fxsc/shopCar/selShopCar.Action' // 查询购物车订单信息
 export const API_CAR_ADDSHOPCARORDER_DATA = './api/wangh_fxsc/order/addShopCarOrder.Action' // 从购物车下订单
 export const API_CAR_DELETE_DATA = './api/wangh_fxsc/shopCar/editShopCar.Action' // 删除购物车
+export const API_CAR_EDITNUM_DATA = './api/wangh_fxsc/shopCar/editShopCarNum.Action' // 编辑购物车数量
+export const API_CAR_PAY_DATA = './api/wangh_fxsc/ali/aliPay.Action' // 支付宝支付
+
+ 

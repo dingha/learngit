@@ -102,7 +102,14 @@
         :goods="goods"
         @add-cart="onAddCartClicked"
         @buy-clicked="onBuyClicked"
-      />
+      >
+        <template #sku-header-price="props">
+          <div class="van-sku__goods-price">
+            <span class="van-sku__price-symbol">￥</span>
+            <span class="van-sku__price-num">{{ props.price*100 }}</span>
+          </div>
+        </template>
+      </van-sku>
     </div>
   </div>
 </template>
@@ -198,7 +205,6 @@ export default {
           this.sku.tree[i].k = item.attrName;
           goodsAttrId[i] = item.id;
         });
-
         goodsAttrId.forEach((item1, i) => {
           const dome = [];
           data.data2.forEach(item2 => {
@@ -388,21 +394,11 @@ export default {
             stock_num: 112 // 当前 sku 组合对应的库存
           }
         ],
-        price: "3.00", // 默认价格（单位元）
+        price: "0.01", // 默认价格（单位元）
         stock_num: 227, // 商品总库存
         collection_id: 2261, // 无规格商品 skuId 取 collection_id，否则取所选 sku 组合对应的 id
         none_sku: false, // 是否无规格商品
-        messages: [
-          {
-            // 商品留言
-            datetime: "0", // 留言类型为 time 时，是否含日期。'1' 表示包含
-            multiple: "0", // 留言类型为 text 时，是否多行文本。'1' 表示多行
-            name: "留言", // 留言名称
-            type: "text", // 留言类型，可选: id_no（身份证）, text, tel, date, time, email
-            required: "1", // 是否必填 '1' 表示必填
-            placeholder: "" // 可选值，占位文本
-          }
-        ],
+
         hide_stock: false // 是否隐藏剩余库存
       },
       goods: {
@@ -429,12 +425,6 @@ export default {
         placeholderMap: {
           text: "xxx",
           tel: "xxx"
-        },
-        // 初始留言信息
-        // 键：留言 name
-        // 值：留言内容
-        initialMessages: {
-          留言: "留言信息"
         }
       },
       datalists: [],

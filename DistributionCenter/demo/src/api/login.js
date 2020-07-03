@@ -75,7 +75,7 @@ export const postForgesmstData = (phone) => {
 
 
 // 忘记密码
-export const postForgetData = (phone,code) => {
+export const postForgetData = (phone, code) => {
     return request(API_LOGIN_SETFORGOTTEN_FORGET_DATA, {
             data: {
                 "phoneNum": phone,
@@ -83,7 +83,6 @@ export const postForgetData = (phone,code) => {
             }
         })
         .then(data => {
-            // console.log(345, data)
             return data;
         })
         .catch(err => {
@@ -94,7 +93,7 @@ export const postForgetData = (phone,code) => {
 
 
 // 修改密码
-export const postModifyData = (phone,pwd) => {
+export const postModifyData = (phone, pwd) => {
     return request(API_LOGIN_SETFORGOTTEN_FORGET_DATA, {
             data: {
                 "phoneNum": phone,
@@ -102,7 +101,6 @@ export const postModifyData = (phone,pwd) => {
             }
         })
         .then(data => {
-            console.log(345, data)
             return data;
         })
         .catch(err => {

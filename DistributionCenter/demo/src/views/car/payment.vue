@@ -2,11 +2,11 @@
 <template>
   <div class="payment">
     <div class="payment-top">
-      <van-nav-bar title="支付方式" left-arrow @click-left="onClickLeft" @click-right="onClickRight" />
+      <van-nav-bar title="支付方式" left-arrow @click-left="onClickLeft" />
     </div>
     <div class="payment-countdown">
       <div class="payment-countdown-content">
-        <van-count-down :time="time" format="HH: mm" />剩余支付时间
+        <van-count-down :time="time" format=" mm:ss" />剩余支付时间
       </div>
     </div>
     <div class="payment-way">
@@ -40,24 +40,46 @@
         </van-radio-group>
       </div>
     </div>
-    <van-button class="payment-buttom" type="danger">立即支付</van-button>
+    <van-button class="payment-buttom" @click="onpay" type="danger">立即支付</van-button>
+    <van-overlay :show="show" @click="show = false">
+      <div class="wrapper">
+        <div class="block" id="block" @click.stop />
+      </div>
+    </van-overlay>
   </div>
 </template>
 
 <script>
+import { postCarPayData } from "../../api/car";
 export default {
   name: "",
   methods: {
     onClickLeft() {
       this.$router.go(-2);
     },
-    onClickRight() {
-      //   Toast("按钮");
+    onpay() {
+      this.show = true;
+      const post = postCarPayData();
+      post
+        .then(data => {
+          let testForm = document.getElementById("block");
+          testForm.innerHTML = data.data.data.split("<script>")[0];
+          setTimeout(() => {
+            document.forms[0].submit();
+            setTimeout(() => {
+              this.$router.go(-2);
+            }, 1100);
+          }, 333);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
   data() {
     return {
-      time: 30 * 60 * 60 * 1000,
+      show: false,
+      time: 30 * 60 * 1000,
       radio: "1"
     };
   }
@@ -69,6 +91,20 @@ export default {
   background: rgba(241, 241, 241, 1);
   width: 100%;
   height: 100%;
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .block {
+    width: 0;
+    height: 0;
+    background-color: #fff;
+  }
+
   .payment-top {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     /deep/ {

@@ -3,13 +3,24 @@
   <div class="login-welcome">
     <div class="login-welcome-top">
       <div class="login-welcome-top-img">
-        <van-image
-          @click="gotomy"
-          width="30%"
-          height="30%"
-          fit="contain"
-          :src="require('../../assets/png/login/piccircle@3x.png')"
-        />
+        <van-circle
+          :stroke-width="20"
+          size="2.7rem"
+          v-model="currentRate"
+          :rate="currentRates"
+          :speed="33"
+          :text="text"
+        >
+          <template slot="default">
+            <van-image
+              @click="gotomy"
+              width="96%"
+              height="96%"
+              fit="contain"
+              :src="require('../../assets/png/login/piccircle@3x.png')"
+            />
+          </template>
+        </van-circle>
       </div>
 
       <div class="login-welcome-top-name">
@@ -32,11 +43,30 @@
 <script>
 export default {
   name: "",
+  data() {
+    return {
+      currentRate: 1,
+      currentRates: 100
+    };
+  },
+  computed: {
+    text() {
+      return this.currentRate.toFixed(0) + "%";
+    }
+  },
+  created() {
+    setTimeout(() => {
+      this.$router.push({
+        path: "/home",
+        query: { id: "/home" }
+      });
+    }, 3000);
+  },
   methods: {
     gotomy() {
       this.$router.push({
-        path: "/my",
-        query: { id: "/my" }
+        path: "/home",
+        query: { id: "/home" }
       });
     }
   }
@@ -53,6 +83,9 @@ export default {
     text-align: center;
     .login-welcome-top-img {
       padding-top: 35%;
+      .van-image {
+        padding: 3px 0 0 0px;
+      }
     }
     .login-welcome-top-name {
       padding-top: 5%;

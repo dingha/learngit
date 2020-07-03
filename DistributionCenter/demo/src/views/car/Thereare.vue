@@ -26,8 +26,8 @@
                   <p>胡桃木色</p>
                 </template>
                 <template #footer>
-                  <span>的暂未编辑语言</span>
-                  <span>留言</span>
+                  <span>{{messages[index].name}}</span>
+                  <button v-if="onmessages" @click.stop="onmessages(index)">留言</button>
                 </template>
               </van-card>
             </template>
@@ -51,7 +51,7 @@
         <p>购物车还是空的</p>
       </div>
       <div class="car-footer">
-        <van-submit-bar :price="3050" type="warning" button-text="去结算">
+        <van-submit-bar :price="0" type="warning" button-text="去结算">
           <van-checkbox @click="checkAll">全选</van-checkbox>
         </van-submit-bar>
       </div>
@@ -61,15 +61,24 @@
 
 <script>
 import { postCarOrderData } from "../../api/car";
-
+export const messagesss = [
+  { name: "我要圆通快递发货啊1" },
+  { name: "我要圆通快递发货啊1" },
+  { name: "我要圆通快递发货啊1" },
+  { name: "我要圆通快递发货啊1" },
+  { name: "我要圆通快递发货啊1" },
+  { name: "我要圆通快递发货啊1" },
+  { name: "我要圆通快递发货啊1" },
+  { name: "我要圆通快递发货啊1" }
+]; // 临时的messages
 export default {
   name: "",
   created() {
+    this.messages = messagesss;
     // 商品信息
     const post = postCarOrderData();
     post
       .then(data => {
-        console.log(data);
         data.data.data.forEach((item, i) => {
           if (i < this.datalist.length) {
             this.datalist[i] = Object.assign(this.datalist[i], item);
@@ -90,10 +99,16 @@ export default {
       });
   },
   methods: {
+    onmessages(index) {
+      this.$router.push({
+        path: "/car/messageboard",
+        query: { data2: index }
+      });
+    },
     oncheckbox() {
       this.totalprice = 0;
       this.results.forEach(item => {
-        this.totalprice += item.num * item.price;
+        this.totalprice += item.num * item.price * 100;
       });
     },
     // 去结算
@@ -110,7 +125,7 @@ export default {
       this.checked ? (this.results = this.datalist) : (this.results = []);
       this.totalprice = 0;
       this.results.forEach(item => {
-        this.totalprice += item.num * item.price;
+        this.totalprice += item.num * item.price * 100;
       });
     }
   },
@@ -123,6 +138,16 @@ export default {
       emptyshow: true,
       checked: false,
       result: "",
+      messages: [
+        { name: "我要圆通快递发货啊" },
+        { name: "我要圆通快递发货啊" },
+        { name: "我要圆通快递发货啊" },
+        { name: "我要圆通快递发货啊" },
+        { name: "我要圆通快递发货啊" },
+        { name: "我要圆通快递发货啊" },
+        { name: "我要圆通快递发货啊" },
+        { name: "我要圆通快递发货啊" }
+      ],
       datalist: [
         {
           img: require("../../assets/png/home/goods/2@3x.png"),
@@ -132,20 +157,6 @@ export default {
           color: "胡桃木色",
           num: 5,
           price: 10
-        },
-        {
-          img: require("../../assets/png/home/goods/2@3x.png"),
-          title: "家居1 Design",
-          name: "木质设计感茶几",
-          specifications: "400*400*56cm;黑虎桃木",
-          color: "胡桃木色"
-        },
-        {
-          img: require("../../assets/png/home/goods/2@3x.png"),
-          title: "家居2 Design",
-          name: "木质设计感茶几",
-          specifications: "400*400*56cm;黑虎桃木",
-          color: "胡桃木色"
         }
       ]
     };

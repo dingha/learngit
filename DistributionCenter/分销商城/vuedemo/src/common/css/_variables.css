@@ -1,0 +1,12 @@
+/*声明一个变量可以在全局使用*/
+:root {
+    --font-size-normal: 0.26rem;
+    --border-normal: 1px solid;
+    /*层级*/
+    --z-index--hide: -1;
+    --z-index--normal: 1;
+    --z-index--mask: 700;
+    --z-index--bottom: 800;
+    --z-index--modal: 900;
+    --z-index--toast: 1000;
+}

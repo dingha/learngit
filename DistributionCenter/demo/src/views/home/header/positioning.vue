@@ -154,15 +154,18 @@ export default {
   }
   .addressshow {
     z-index: 2;
-    background: rgba(241, 241, 241, 1);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background: #f1f1f1;
     position: absolute;
-    background: transparent;
+    background: #fff;
+    width: 60%;
+    padding-left: 1.3rem;
+    margin: 0rem 0rem 0rem 0.7rem;
     .addressshow-text {
-      width: 5.8rem;
+      width: 100%;
       height: 0.3rem;
       background: #fff;
       padding: 0.1rem 0rem;
-      margin: 0rem 0.8rem;
     }
   }
   .d-home-positioning-current {

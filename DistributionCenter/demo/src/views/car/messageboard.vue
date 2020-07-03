@@ -20,15 +20,21 @@
         <p>{{datalist.price}}</p>
       </template>
     </van-cell>
-    <textarea autofocus placeholder="输入留言"></textarea>
+    <textarea v-model="textareas" autofocus :placeholder="messagesss[this.$route.query.data2].name"></textarea>
   </div>
 </template>
 
 <script>
+import { messagesss } from "./Thereare";
 export default {
   name: "",
+  created() {
+    this.messagesss = messagesss;
+  },
   data() {
     return {
+      messagesss: [],
+      textareas: "",
       datalist: {
         image: require("../../assets/png/home/goods/2@3x.png"),
         title: "家居 Design",
@@ -43,7 +49,11 @@ export default {
       this.$router.go(-1);
     },
     onClickRight() {
-      //   Toast("按钮");
+      messagesss[this.$route.query.data2].name = this.textareas;
+      this.$router.push({
+        path: "/car/thereare",
+        query: { id: "/car/thereare" }
+      });
     }
   }
 };

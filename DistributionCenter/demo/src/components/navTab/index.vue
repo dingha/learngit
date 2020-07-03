@@ -8,7 +8,6 @@
         v-for="(data, index) in datalist"
         :key="index"
       >
-        {{$route.query.id}}
         <span>{{data.name}}</span>
         <template #icon="props">
           <img :src="props.active ? data.redimage : data.image" />
@@ -70,4 +69,7 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
+.van-tabbar--fixed {
+  position: absolute;
+}
 </style>

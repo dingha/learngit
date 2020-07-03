@@ -7,7 +7,7 @@ import "./api/vender/request";
 import "./api/index";
 // eslint-disable-next-line no-unused-vars
 import axios from "axios";
-export const Temporarytoken =[] // 临时的token
+export const Temporarytoken = [] // 临时的token
 import {
   Button,
   Tabbar,
@@ -51,7 +51,10 @@ import {
   CountDown,
   RadioGroup,
   Radio,
-  Toast
+  Toast,
+  Overlay,
+  Progress,
+  Circle
 } from "vant";
 
 import a from "utils";
@@ -100,6 +103,9 @@ Vue.use(CountDown);
 Vue.use(Radio);
 Vue.use(RadioGroup);
 Vue.use(Toast);
+Vue.use(Overlay);
+Vue.use(Progress);
+Vue.use(Circle);
 Vue.config.productionTip = false;
 
 new Vue({

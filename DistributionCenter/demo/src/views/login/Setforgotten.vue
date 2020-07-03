@@ -17,7 +17,7 @@
 </template>
 
 <script>
-// import { Toast } from "vant";
+import { Toast } from "vant";
 import { postForgesmstData, postForgetData } from "../../api/login";
 export default {
   name: "",
@@ -31,36 +31,35 @@ export default {
       placeholderpwd: "请输入验证码",
       btnsubmit: "下一步",
       type: ""
-      //password
     };
   },
   methods: {
     sms() {
-      const smspost = postForgesmstData(this.username);
-      smspost.then(data => {
-        console.log(data);
-        // Toast(data.data.msg);
+      if (this.username === "") return Toast("请输入手机号");
+      postForgesmstData(this.username).then(data => {
+        Toast(data.data.msg);
       });
     },
-    onSubmit(values) {
+    onSubmit() {
+      if (this.username == "" || this.password == "")
+        return Toast("输入框为空");
       if (this.btnsubmit === "下一步") {
-        this.btnsubmit = "确认修改";
-        this.title = "设置密码";
-        this.placeholdername = "请输入新密码";
-        this.placeholderpwd = "请再次输入新密码";
-        console.log("submit", values);
         const forgepost = postForgetData(this.username, this.password);
-        forgepost.then(data => {
-          console.log(data);
-          // Toast(data.data.msg);
-          this.username = this.password = "";
-        });
+        forgepost
+          .then(data => {
+            if (data.data.msg != "验证码正确") return Toast(data.data.msg);
+            this.btnsubmit = "确认修改";
+            this.title = "设置密码";
+            this.placeholdername = "请输入新密码";
+            this.placeholderpwd = "请再次输入新密码";
+            this.username = this.password = "";
+            return data;
+          })
+          .catch(err => {
+            console.log(err);
+          });
       } else if (this.btnsubmit === "确认修改") {
-        const forgepost = postForgetData(this.username, this.password);
-        forgepost.then(data => {
-          console.log(data);
-          // Toast(data.data.msg);
-        });
+        postForgetData(this.username, this.password);
       }
     },
     onClickLeft() {

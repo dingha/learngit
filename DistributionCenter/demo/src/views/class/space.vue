@@ -34,7 +34,6 @@ export default {
   name: "",
   methods: {
     gotoparameter(datas) {
-      console.log(datas);
       const goodsId = datas.id;
       this.$router.push({
         path: "/home/parameter",

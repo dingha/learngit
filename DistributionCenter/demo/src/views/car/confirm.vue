@@ -2,7 +2,7 @@
 <template>
   <div class="confirm">
     <div class="confirm-top">
-      <van-nav-bar title="确认订单" left-arrow @click-left="onClickLeft" @click-right="onClickRight" />
+      <van-nav-bar title="确认订单" left-arrow @click-left="onClickLeft" />
     </div>
     <div class="confirm-content">
       <div class="confirm-positioning">
@@ -28,8 +28,8 @@
           <van-cell class="van-cell-content" :name="index">
             <template #default>
               <van-card
-                num="32"
-                price="2.00"
+                :num="data.num"
+                :price="data.price"
                 :title="data.name"
                 desc="400*400*56cm;黑虎桃木"
                 :thumb="data.img"
@@ -38,16 +38,11 @@
                   <p>{{data.color}}</p>
                 </template>
                 <template #num>
-                  <van-stepper @change="onstepper" v-model="data.num" integer />
+                  <van-stepper @change="onChange" v-model="data.num" integer />
                 </template>
                 <template #footer>
                   <div class="footer-top">
                     <van-field rows="1" autosize label="留言：" type="textarea" placeholder="请输入留言" />
-                  </div>
-                  <div class="footer-bottom">
-                    <!-- <span class="footer-bottom-num">共计 {{data.num}} 件商品</span>
-                    <span>小计：</span>
-                    <span class="footer-bottom-price">￥{{data.price}}</span>-->
                   </div>
                 </template>
               </van-card>
@@ -63,7 +58,7 @@
             <span>可用1000积分抵扣10元</span>
           </template>
           <template #right-icon>
-            <van-checkbox v-model="checked" shape="square"></van-checkbox>
+            <van-checkbox v-model="checked" @change="change1" shape="square"></van-checkbox>
           </template>
         </van-cell>
       </van-cell-group>
@@ -73,7 +68,7 @@
       <van-cell title="单元格" value="内容" label="描述信息">
         <template #title>
           <span>合计：</span>
-          <span>￥{870}</span>
+          <span>￥{{sum}}</span>
         </template>
         <template #label>
           <span>共3件商品</span>
@@ -91,6 +86,8 @@ import { postCarAddshopcarorderData } from "../../api/car";
 export default {
   name: "",
   created() {
+    this.sum = 0;
+
     this.$route.query.data.forEach((item, i) => {
       if (i < this.datalist.length) {
         this.datalist[i] = Object.assign(this.datalist[i], item);
@@ -98,12 +95,15 @@ export default {
         this.datalist.push(item);
       }
     });
-    console.log(this.datalist);
+    this.datalist.forEach(item => {
+      this.sum += item.num * item.price;
+    });
   },
   data() {
     return {
+      sum: 66,
       checked: false,
-      result: [true],
+      result: [],
       datalist: [
         {
           img: require("../../assets/png/home/goods/2@3x.png"),
@@ -116,17 +116,32 @@ export default {
     };
   },
   methods: {
+    change1() {
+      if (this.checked === true) {
+        this.sum -= 1;
+      } else {
+        this.sum += 1;
+      }
+    },
+    onChange() {
+      this.sum = 0;
+      this.datalist.forEach(item => {
+        this.sum += item.num * item.price;
+      });
+    },
     onSubmit() {
       this.datalist.forEach(item => {
-        console.log(item);
         const post = postCarAddshopcarorderData(item);
         post
           .then(data => {
-            console.log(data);
             if (data.data.msg === "添加成功") {
               this.$router.push({
                 path: "/car/payment",
-                query: { id: "/car/payment", data: this.datalist }
+                query: {
+                  id: "/car/payment",
+                  sum: this.sum,
+                  data: this.datalist
+                }
               });
             }
             return data;
@@ -136,16 +151,8 @@ export default {
           });
       });
     },
-    // 进步器
-    onstepper(string) {
-      console.log(string);
-      console.log(this.datalist[0].num);
-    },
     onClickLeft() {
       this.$router.go(-1);
-    },
-    onClickRight() {
-      //   Toast("按钮");
     }
   }
 };

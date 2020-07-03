@@ -2,7 +2,9 @@ import request from "./vender/request";
 import {
     API_CAR_ORDER_DATA,
     API_CAR_ADDSHOPCARORDER_DATA,
-    API_CAR_DELETE_DATA
+    API_CAR_DELETE_DATA,
+    API_CAR_PAY_DATA,
+    API_CAR_EDITNUM_DATA
 } from "./URLS.js";
 
 // 购物车订单信息
@@ -63,7 +65,47 @@ export const postCarDeleteData = (item) => {
             }
         })
         .then(data => {
-            console.log(data)
+            return data;
+        })
+        .catch(err => {
+            return err;
+        });
+};
+// 编辑购物车数量
+export const postCarEditNumData = (ID, NUM) => {
+    
+    return request(API_CAR_EDITNUM_DATA, {
+            data: {
+                "shopCar": {
+                    "id": ID,
+                    "num": NUM
+                }
+            },
+            headers: {
+                "Content-Type": "application/json",
+                token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNTY3NTUxOTAyNiJ9.8And-u_VNz5z9GLkBxT6voFIYbgpyDfhvd7a6PGzl7U"
+            }
+        })
+        .then(data => {
+            return data;
+        })
+        .catch(err => {
+            return err;
+        });
+};
+
+// 支付宝支付
+export const postCarPayData = () => {
+    return request(API_CAR_PAY_DATA, {
+            data: {
+                "orderNo": ""
+            },
+            headers: {
+                "Content-Type": "application/json",
+                token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNTY3NTUxOTAyNiJ9.8And-u_VNz5z9GLkBxT6voFIYbgpyDfhvd7a6PGzl7U"
+            }
+        })
+        .then(data => {
             return data;
         })
         .catch(err => {
