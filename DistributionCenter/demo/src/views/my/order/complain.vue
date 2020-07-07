@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div class>这是秒杀页面</div>
+  <div class>投诉</div>
 </template>
 
 <script>

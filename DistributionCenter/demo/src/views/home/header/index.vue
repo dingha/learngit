@@ -11,7 +11,7 @@
     placeholder="请输入关键字"
   >
     <template #left>
-      <div @click="gotolink" ref="navtabbox" class="d-home-heade-address">
+      <div @click="gotolink" ref="Tabbarbox" class="d-home-heade-address">
         <label>杭州</label>
         <van-icon name="arrow-down" />
       </div>
@@ -21,14 +21,14 @@
         <van-icon name="shopping-cart-o" size=".45rem" />
       </div>
     </template>
-  </van-search> 
+  </van-search>
 </template>
 
 <script>
-import { navTabbox } from "../../../components/navTab/index";
+import { Tabbarbox } from "../../../components/Tabbar/index";
 export default {
   name: "",
-  components: navTabbox,
+  components: Tabbarbox,
   methods: {
     gotolink() {
       this.$router.push({ path: "/home/positioning" });

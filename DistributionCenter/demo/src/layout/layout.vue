@@ -5,16 +5,16 @@
       <router-view></router-view>
     </div>
     <div class="d-footer-container">
-      <navTab />
+      <Tabbar />
     </div>
   </div>
 </template>
 
 <script>
-import navTab from "../components/navTab/index";
+import Tabbar from "../components/Tabbar/index";
 export default {
   name: "footertab",
-  components: { navTab }
+  components: { Tabbar }
 };
 </script>
 

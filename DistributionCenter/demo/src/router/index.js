@@ -3,12 +3,49 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
+// 这里写class页面切换的不同视口路径
+const classChildren = [{
+    path: "/class/category",
+    name: "class/category",
+    component: () =>
+      import( /* webpackChunkName: "class" */ "../views/class/category.vue")
+  },
+  {
+    path: "/class/space",
+    name: "class/space",
+    component: () =>
+      import( /* webpackChunkName: "class" */ "../views/class/space.vue")
+  },
+  {
+    path: "/class/style",
+    name: "class/style",
+    component: () =>
+      import( /* webpackChunkName: "class" */ "../views/class/style.vue")
+  }
+]
+
+// 这里写car页面切换的不同视口路径
+const carChildren = [{
+    path: "/car/Thereare",
+    name: "car/Thereare",
+    component: () =>
+      import( /* webpackChunkName: "car" */ "../views/car/Thereare.vue")
+  },
+  {
+    path: "/car/editor",
+    name: "car/editor",
+    component: () =>
+      import( /* webpackChunkName: "car" */ "../views/car/editor.vue")
+  }
+]
+
+
 // 这里写底部切换的不同视口路径
 const bottomChildren = [{
     path: "/home",
     name: "home",
     component: () =>
-      import( /* webpackChunkName: "home" */ "../views/home/index.vue")
+      import( /* webpackChunkName: "home" */ "../views/home/index.vue"),
   },
   {
     path: "/class",
@@ -16,31 +53,7 @@ const bottomChildren = [{
     redirect: "/class/category",
     component: () =>
       import( /* webpackChunkName: "class" */ "../views/class/index.vue"),
-    children: [{
-        path: "/class/category",
-        name: "class/category",
-        component: () =>
-          import( /* webpackChunkName: "class" */ "../views/class/category.vue")
-      },
-      {
-        path: "/class/space",
-        name: "class/space",
-        component: () =>
-          import( /* webpackChunkName: "class" */ "../views/class/space.vue")
-      },
-      {
-        path: "/class/style",
-        name: "class/style",
-        component: () =>
-          import( /* webpackChunkName: "class" */ "../views/class/style.vue")
-      }
-    ]
-  },
-  {
-    path: "/kill",
-    name: "kill",
-    component: () =>
-      import( /* webpackChunkName: "kill" */ "../views/kill/index.vue")
+    children: classChildren
   },
   {
     path: "/car",
@@ -66,19 +79,7 @@ const bottomChildren = [{
     },
     component: () =>
       import( /* webpackChunkName: "car" */ "../views/car/index.vue"),
-    children: [{
-        path: "/car/Thereare",
-        name: "car/Thereare",
-        component: () =>
-          import( /* webpackChunkName: "car" */ "../views/car/Thereare.vue")
-      },
-      {
-        path: "/car/editor",
-        name: "car/editor",
-        component: () =>
-          import( /* webpackChunkName: "car" */ "../views/car/editor.vue")
-      }
-    ]
+    children: carChildren
   },
   {
     path: "/car/messageboard",
@@ -93,6 +94,9 @@ const bottomChildren = [{
       import( /* webpackChunkName: "my" */ "../views/my/index.vue")
   }
 ];
+
+
+
 //这里写login页面切换的不同视口路径
 const loginChildren = [{
     name: "/login/login",
@@ -174,6 +178,48 @@ const routes = [{
     name: "car/confirm",
     component: () =>
       import( /* webpackChunkName: "car" */ "../views/car/confirm.vue")
+  },
+  {
+    path: "/my/setup",
+    name: "my/setup",
+    component: () =>
+      import( /* webpackChunkName: "car" */ "../views/my/Setup/setup.vue")
+  },
+  {
+    path: "/my/feedback",
+    name: "my/feedback",
+    component: () =>
+      import( /* webpackChunkName: "car" */ "../views/my/Setup/feedback.vue")
+  },
+  {
+    path: "/my/information",
+    name: "my/information",
+    component: () =>
+      import( /* webpackChunkName: "car" */ "../views/my/Personal/information.vue")
+  },
+  {
+    path: "/my/address",
+    name: "my/address",
+    component: () =>
+      import( /* webpackChunkName: "car" */ "../views/my/Personal/address.vue")
+  },
+  {
+    path: "/my/newaddress",
+    name: "my/newaddress",
+    component: () =>
+      import( /* webpackChunkName: "car" */ "../views/my/Personal/newaddress.vue")
+  },
+  {
+    path: "/my/realname",
+    name: "my/realname",
+    component: () =>
+      import( /* webpackChunkName: "car" */ "../views/my/Personal/realname.vue")
+  },
+  {
+    path: "/my/order",
+    name: "my/order",
+    component: () =>
+      import( /* webpackChunkName: "car" */ "../views/my/order/index.vue")
   },
   {
     name: "*",

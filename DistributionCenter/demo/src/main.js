@@ -5,6 +5,7 @@ import "./common/js/index";
 import "./common/css/index.css";
 import "./api/vender/request";
 import "./api/index";
+
 // eslint-disable-next-line no-unused-vars
 import axios from "axios";
 export const Temporarytoken = [] // 临时的token
@@ -54,11 +55,16 @@ import {
   Toast,
   Overlay,
   Progress,
-  Circle
+  Circle,
+  Switch,
+  Uploader,
+  DatetimePicker,
+  Popup
 } from "vant";
 
 import a from "utils";
 a();
+
 Vue.use(Col);
 Vue.use(Row);
 Vue.use(Button);
@@ -106,6 +112,10 @@ Vue.use(Toast);
 Vue.use(Overlay);
 Vue.use(Progress);
 Vue.use(Circle);
+Vue.use(Switch);
+Vue.use(Uploader);
+Vue.use(DatetimePicker);
+Vue.use(Popup);
 Vue.config.productionTip = false;
 
 new Vue({
